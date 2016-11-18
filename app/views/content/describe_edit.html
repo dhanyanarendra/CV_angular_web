@@ -1,0 +1,121 @@
+<ng-include src="'views/partials/project_header.html'"></ng-include>
+
+<!-- edit project starts -->
+<div id="describe-content" ng-controller = "describeCtrl as describe" >
+  <div class="container">
+    <br />
+    <br />
+    <div class="progress_bar">
+      <span class="flowCircle" ng-class="{blue: hover}"
+      ng-selected="hover = true">1</span>
+      <a href="#describe" class="flow"><span  ng-class="{red: hover}"
+        ng-selected="hover = true">Describe</span></a>
+        <span class="flowCircle flowCircle_margin">2</span>
+        <a href=""><span class="flow ">Structure</span></a>
+      </div>
+      <hr />
+      <!--  <p class="profile_name">Describe</p> -->
+      <div class="describe_heading">Describe Your Project !</div>
+      <form name="describeForm">
+        <div class="project_form">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="project_title">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label title-label required-field">Title</label>
+                    <div class="col-sm-10">
+                      <input type="text"  maxlength="60" placeholder="Please enter your project title" class="title_form" ng-model = "projects.title" required/>
+
+
+                      <span style="color:#a94442" ng-show="!projects.title.length && describe.editsubmitted" class="control-label" for="inputError">Please enter the project title</span>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="upload_image">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-12 control-label title-label">image</label>
+                    <div class="row">
+                      <div class="col-sm-9">
+                        <input type="file" ng-file-select id="imageField"/>
+                        <input type="text" placeholder="No file selected" class="label_form title_form upload_image_form" ng-model = "image" ng-change="describe.flush();">
+                      </div>
+                      <div class="col-sm-3"><button class="btn btn-info btn-attach" type="button" ng-click="describe.triggerUpload(); describe.flush();" >ATTACH</button></div>
+                    </div>
+                    <span class="img_er_msg" ng-show="describe.imageFormat" for="inputError">Choose a valid image format</span>
+                  </div>
+                </form>
+              </div>
+              <div class="title">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label title-label required-field">Category</label>
+                    <div class="col-sm-10">
+                      <div class="dropdown" id="category-btn">
+                        <button class="btn btn-block btn-primary btn-dropdown dropdown-toggle category" type="button" data-toggle="dropdown"><i class="fa fa-chevron-down fa-chevron-down-custom pull-right"></i>
+                          <span ng-if ="!displayCategory "> {{projects.category}}</span>
+                          <span ng-if ="displayCategory ">{{displayCategory}}</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-categories category">
+                          <li ng-repeat="category in categories" ng-click="setDisplayCategory(category)"><a href="">{{category}}</a></li>
+                        </ul>
+                      </div>
+                     <!--  <span style="color:#a94442" ng-if ="displayCategory  && describe.editsubmitted" class="control-label" for="inputError">Please choose the category</span> -->
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="upload_image">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-12 control-label title-label required-field">short Description</label>
+
+                    <div class="row">
+                      <div class="col-sm-2"></div>
+                      <div class="col-sm-10">
+                        <textarea class="form-control description-textarea" rows="3" placeholder="maximum 140 characters" ng-model = "projects.short_description" rows="4" cols="140" maxlength="140"required></textarea>
+
+                        <span ng-show="!projects.short_description.length && describe.editsubmitted" class="control-label d-e-msg" for="inputError">Please enter the short description</span>
+
+                        <span style="color:#a94442" ng-show="projects.short_description.length >140 && describe.submitted" class="control-label" for="inputError">Maximum 140 characters can be entered </span>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="upload_image">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-12 control-label title-label">Long Description</label>
+                    <div class="row">
+                      <div class="col-sm-2"></div>
+                      <div class="col-sm-10">
+                        <textarea class="form-control description-textarea description_font" rows="3"  placeholder="Background" ng-model = "projects.background"></textarea>
+                        <textarea class="form-control description-textarea description_font" rows="3" placeholder="Impact" ng-model = "projects.impact"></textarea>
+                        <textarea class="form-control description-textarea description_font" rows="3" placeholder="Need" ng-model = "projects.need"></textarea>
+                        <textarea class="form-control description-textarea description_font" rows="3" placeholder="Risks" ng-model = "projects.risks"></textarea>
+                        <textarea class="form-control description-textarea description_font" rows="3" placeholder="Otherways to help" ng-model = "projects.others"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col-sm-6"></div>
+          </div>
+          <div class="row d-b-bottom">
+            <div class="col-sm-8"></div>
+            <div class="col-sm-4 text-right">
+              <div id="d-buttons">
+                <button type="button" class="btn btn-warning-outline" ng-hide="publishedStatus" ng-click = "describe.editsubmitted = true;editProjectDetails(projects, 'saveQuit');">Save and Quit</button>
+                <button class="btn btn-info btn-info-custom btn-next" type="button"  ng-click = "describe.editsubmitted = true; editProjectDetails(projects, 'saveNext');">Next&nbsp;<i class="next_icon"></i></button>
+              </div>
+            </div>
+            <!-- <div id="warning"> --><!-- </div> -->
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

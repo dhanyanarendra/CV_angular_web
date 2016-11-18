@@ -1,0 +1,261 @@
+<!-- Describe-structure-preview -->
+<div id="describe-content" class="preview_background" ng-controller = "previewCtrl as preview">
+  <div class="container">
+    <br>
+    <br>
+    <div class="progress_bar">
+      <span class="flowCircle">1</span>
+      <a href="" class="flow">
+        <span>Describe</span>
+      </a>
+      <span class="flowCircle flowCircle_margin">2</span>
+      <a href="" class="flow">
+        <span >Structure</span>
+      </a>
+    </div>
+    <hr>
+    <!--  <p class="profile_name">Describe</p> -->
+    <div class="preview_project_title">
+      <div class="row">
+        <div class="col-sm-4">
+          <p>{{preview.project_name}}</p>
+        </div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4 text-right">
+          <button type="button" class="btn btn-edit" ng-click="preview.updateProjectDetails();" >EDIT</button>
+          <button class="btn btn-info btn-info-custom btn-publish" ng-click = "nextPage();" type="button">Publish&nbsp;
+            <i class="next_icon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Preview -->
+    <div id="preview_describe">
+      <div class="preview_titles">
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="p_describe">Describe</p>
+          </div>
+          <div class="col-sm-6"></div>
+          <div class="col-sm-3">
+            <p class="p_plant">{{preview.category}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="preview_describe_description">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="preview_describe_fields">
+              <h5 ng-show = "preview.background">Background</h5>
+              <p>{{preview.background}}
+              </p>
+            </div>
+            <div class="preview_describe_fields">
+              <h5 ng-show = "preview.impact">Impact</h5>
+              <p>{{preview.impact}}
+              </p>
+            </div>
+            <div class="preview_describe_fields">
+              <h5 ng-show = "preview.need">Need</h5>
+              <p>{{preview.need}}
+              </p>
+            </div>
+            <div class="preview_describe_fields">
+              <h5 ng-show = "preview.risk">Risk</h5>
+              <p>{{preview.risk}}
+              </p>
+            </div>
+            <div class="preview_describe_fields">
+              <h5 ng-show = "preview.others">Other Ways to Help</h5>
+              <p>{{preview.others}}
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="preview_image">
+              <img src="{{preview.image || 'images/image_placeholder_gray-350x600.png'}}" class="img-responsive">
+              <br>
+              <p>
+                {{preview.short_description}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="preview_structure">
+      <div class="preview_titles">
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="p_describe">Structure</p>
+          </div>
+          <div class="col-sm-6"></div>
+          <div class="col-sm-3"></div>
+        </div>
+      </div>
+      <div class="preview_structure_details">
+
+        <div class="preview-border" ng-repeat="goal in preview.goals">
+          <h5>{{goal.title|limitTo: 27}}{{goal.title.length > 20 ? '...' : ''}}</h5>
+          <div class="preview-task-margin" ng-repeat="task in goal.tasks">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="task1">
+                  <div class="p_g_t_border"></div>
+                  <div class="p_task_padding">
+                    <div class="row">
+                      <div class="col-sm-1">
+                        <img src="../images/circle_check.png" class="img-responsive circle_check_icon p_circle_check">
+                      </div>
+                      <div class="col-sm-7">
+                        <p class="p_task">{{task.title|limitTo: 27}}{{task.title.length > 20 ? '...' : ''}}</p>
+                      </div>
+                      <div class="col-sm-4">
+                        <ul class="list">
+                          <li class="p_month">{{task.date | date:'MMM d'}}</li>
+                          <li>
+                            <img src="../images/icon-task-details.png" class="img-responsive task_icon click" ng-if="task.description || task.date || task.time || task.venue || task.timezone">
+                          </li>
+                          <li>
+                            <img src="../images/icon-needs.png" class="img-responsive task_icon click" ng-if="task.needs.length">
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="p_t_details">
+                    <div class="row">
+                      <div class="col-sm-1"></div>
+                      <div class="col-sm-11">
+                        <div>
+                          <div class="row">
+                            <div class="col-sm-5 p_border_right" ng-if="task.date">
+                              <img src="../images/icon-date.png" class="img-responsive">
+                              <p>{{task.date | date:'dd-MM-yyyy'}}</p>
+                            </div>
+                            <div class="col-sm-3 p_border_right" ng-if="task.time">
+                              <img src="../images/icon-time.png" class="img-responsive">
+                              <p>{{task.time | date: 'h:mma'}}</p>
+                            </div>
+                            <div class="col-sm-3" ng-if="task.timezone">
+                              <div>{{task.timezone| uppercase}}</div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                          </div>
+                        </div>
+                        <div class="p_task_border" ng-if="task.venue">
+                          <div class="row">
+                            <div class="col-sm-11 p_location">
+                              <img src="../images/icon-location.png" class="img-responsive">
+                              <p>{{task.venue}}</p>
+                            </div>
+                            <div class="col-sm-1"></div>
+                          </div>
+                        </div>
+                        <div class="p_task_border no_border" ng-if="task.description">
+                          <div class="row">
+                            <div class="col-sm-1">
+                              <i class="material-icons">chat</i>
+                            </div>
+                            <div class="col-sm-10">
+                              <div class="P_task_description">
+                                {{task.description}}
+                              </div>
+                            </div>
+                            <!--  <div class="col-sm-1"></div> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-sm-6">
+               <div class="row n-top">
+
+                <div class="col-sm-10">
+
+                  <h4>Needs</h4>
+                </div>
+                <div class="col-sm-2"></div>
+              </div>
+              <div>
+                <div class="row" ng-repeat="need in task.needs">
+                  <div class="col-sm-11">
+                    <div class="task_needs p_t_needs">
+                      <div class="row border_needs">
+                        <div class="col-sm-1">Priority</div>
+                        <div class="col-sm-2 p_type">Type</div>
+                        <div class="col-sm-5">Need</div>
+                        <div class="col-sm-1">Qty</div>
+                        <div class="col-sm-1">Unit</div>
+                        <div class="col-sm-2"></div>
+                      </div>
+                      <div>
+                        <div class="row p_n_border">
+                          <div class="col-sm-12 p_n_top">
+                            <div class="row p_needs">
+                              <div class="col-sm-1">
+                                <i class="fa fa-star fa-star-custom p_fa_star p_fa_star_o" ng-if="need.priority"></i>
+                                <i class="fa fa-star-o fa-star-custom p_fa_star p_fa_star_o" ng-if="!need.priority"></i>
+                              </div>
+                              <div class="col-sm-2 p_type">
+                                <img src="../images/icon-manpower.png" class="img-responsive task_icon" ng-if="need.need_type == 'man'">
+                                <img src="../images/icon-tool.png" class="img-responsive task_icon" ng-if="need.need_type == 'material'">
+                                <img src="../images/icon-moneybag.png" class="img-responsive task_icon" ng-if="need.need_type == 'money'">
+                              </div>
+                              <div class="col-sm-5">
+                                {{need.need_name}}
+                              </div>
+                              <div class="col-sm-1">
+                                {{need.quantity}}
+                              </div>
+                              <div class="col-sm-2">
+                                {{need.unit}}
+                              </div>
+                              <div class="col-sm-1"></div></div>
+                              <div class="row p_n_c_bot">
+                                <div class="col-sm-1">
+                                  <img src="../images/icon-description.png">
+                                </div>
+                                <div class="col-sm-11 p_n_des">
+                                  {{need.need_decription}}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+</div>
+<div class="preview_button">
+  <button type="button" class="btn btn-edit" ng-click="preview.updateProjectDetails();">EDIT</button>
+
+  <button class="btn btn-info btn-info-custom btn-publish" ng-click = "nextPage();" type="button">Publish&nbsp;
+
+    <i class="next_icon"></i>
+  </button>
+</div>
+</div>
+</div>

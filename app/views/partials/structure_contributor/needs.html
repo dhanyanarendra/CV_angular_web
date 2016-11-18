@@ -1,0 +1,371 @@
+<div id="need" ng-if="!structure.showSuggestion">
+  <div id="s-c-pledge" class="ng-scope">
+      <div class="row">
+        <div class="col-sm-5 task_detail" >
+          <a href="" ng-if="structure.Details_task.status">
+            <p>Needs
+            </p>
+          </a>
+        </div>
+        <div class="col-sm-5">
+          <div class="sug" ng-if="structure.Details_task.status && structure.user && structure.needsShow && !structure.tasksShow">
+            <span>Suggested by:
+              <a class="suggestion">{{structure.user}}
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    <div class="s-c-tcborder" >
+      <div class="s-c-tdetails" >
+      <div class="table-responsive">
+        <table class="table table-fixed">
+          <thead>
+            <tr ng-if="structure.Details_task.status">
+              <th class="col-sm-1">Priority
+              </th>
+              <th class="col-sm-2">Type
+              </th>
+              <th class="col-sm-4">Needs
+              </th>
+              <th class="col-sm-2">Qty/Tot
+              </th>
+              <th>Pledge</th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody ng-repeat="needitem in structure[structure.Details_task_id].needs" class="needs_row">
+            <tr class="pledge-row">
+              <td scope="row">
+                <span ng-if="!needitem.priority">
+                  <i class="fa fa-star-o fa-star-custom">
+                  </i>
+                </span>
+                <span ng-if="needitem.priority">
+                  <i class="fa fa-star fa-star-custom icon-b">
+                  </i>
+                </span>
+              </td>
+              <td class="type-image" ng-click="structure.toggleRow(needitem)">
+                <span ng-if="needitem.need_type == 'money'">
+                  <img src="../images/icon-moneybag.png" class="img-responsive">
+                </span>
+                <span ng-if="needitem.need_type == 'material'">
+                  <img src="../images/icon-tool.png" class="img-responsive">
+                </span>
+                <span ng-if="needitem.need_type == 'man'">
+                  <img src="../images/icon-manpower.png" class="img-responsive">
+                </span>
+              </td>
+              <td style="padding: 6px;" class="need-font" ng-click="structure.toggleRow(needitem)">
+                <span ng-bind="needitem.need_name" class="overflow" >
+                </span>
+              </td>
+              <td class="need-font" ng-click="structure.toggleRow(needitem)">
+                <span ng-bind="pledgeQuanty(needitem)">
+                </span>/
+                <span ng-bind="needitem.quantity">
+                </span>
+              </td>
+              <td class="need-font" ng-if="!needitem.activerow" ng-click="structure.toggleRow(needitem)">
+                <span ng-bind="getQuantity(needitem)">
+                </span>
+              </td>
+              <td class="need-font" ng-if="needitem.activerow">
+                <input  class="form-control" ng-model="needitem.new_quantity" placeholder="00" min="1" ng-if="!needitem.pledge[0].pledged" type="text"  onkeypress="return (event.keyCode == 46 || event.keyCode == 8 ||( event.charCode >= 48 && event.charCode <= 57));" ng-pattern = "/^[0-9]+[0-9]*$/ ">
+                <span ng-bind="needitem.pledge[0].quantity" ng-if="needitem.pledge[0].pledged">
+                </span>
+              </td>
+              <td ng-if="!needitem.activerow" ng-click="structure.toggleRow(needitem) ">
+                <img src="../images/icon-pledge-off.png" ng-if="!needitem.pledge[0].pledged" class="needs_pledge need_pledgeicon">
+                <img src="../images/icon-pledge-on.png" ng-if="needitem.pledge[0].pledged" class="needs_pledge">
+              </td>
+              <td ng-if="needitem.activerow">
+                <button type="button" ng-click="pledgequantity(true, needitem);" class="btn btn-info btn-pledge" ng-if="!needitem.pledge[0].pledged" ng-disabled="!needitem.new_quantity || needitem.new_quantity < 1 || needitem.new_quantity.$error.pattern">pledge
+                </button>
+                <button ng-click="pledgequantity(false, needitem);" type="button" class="btn btn-info btn-pledge" ng-if="needitem.pledge[0].pledged">Unpledge
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="7" ng-bind="needitem.need_decription" ng-if="needitem.activerow">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Suggestion Task -->
+<form class="task_input">
+  <div class="s-needs-sect" ng-if="structure.showSuggestion && structure.needssugShow && structure.checkUser()">
+    <div class="row" >
+      <div class="col-sm-10 col-xs-9" >
+        <a href="">
+          <p>Needs
+          </p>
+        </a>
+      </div>
+      <div class="col-sm-2 col-xs-3" >
+        <a href="">
+          <i class="material-icons material-arrow-up">keyboard_arrow_up
+          </i>
+          <i class="material-icons material-arrow-down">keyboard_arrow_down
+          </i>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="table-responsive">
+        <table class="table table-fixed">
+          <thead>
+            <tr class="n-heading">
+              <th>Priority
+              </th>
+              <th>Type
+              </th>
+              <th>Needs
+              </th>
+              <th>Qty
+              </th>
+              <th>
+              </th>
+              <th>
+              </th>
+            </tr>
+          </thead>
+          <form name = "needForm">
+          <tbody ng-repeat="needitem in structure.sug_needs|orderBy: 'created_at'" ng-click = "structure.highlightConNeed(needitem, $index);" ng-class="{'active': structure.selectedConNeed == $index }">
+              <tr>
+                <td class="text-center">
+                  <a href=""  ng-if="!needitem.priority"  ng-model = "needitem.priority"> 
+                    <i class="fa fa-star-o fa-star-custom">
+                    </i>
+                  </a>
+                  <a href=""  ng-if="needitem.priority"  ng-model = "needitem.priority"> 
+                    <i class="fa fa-star fa-star-custom">
+                    </i>
+                  </a>
+                </td>
+                <td>
+                  <img src="../images/icon-moneybag.png" ng-if="needitem.need_type == 'money'"  data-toggle="dropdown" ng-hide = "needitem.imageVar" ng-model = "needitem.editselectImage">
+                  <img src="../images/icon-tool.png" ng-if="needitem.need_type == 'material'"   data-toggle="dropdown" ng-hide = "needitem.imageVar" ng-model = "needitem.editselectImage">
+                  <img src="../images/icon-manpower.png" ng-if="needitem.need_type == 'man'" data-toggle="dropdown" ng-hide = "needitem.imageVar" ng-model = "needitem.editselectImage">
+                  <input class="type_edit" ng-if = "needitem.need_type != 'man'  && needitem.need_type != 'money' && needitem.need_type != 'material'"   ng-hide = "needitem.imageVar" ng-click = "structure.editImage(needitem);" ng-model = "needitem.editselectImage" ng-class="{'active': structure.selectedNeed == $index }">
+                  <!-- <div ng-show = "needitem.imageVar"> -->
+                  <!-- <div class="btn-group"> -->
+                  <a class="btn-small dropdown-toggle" data-toggle="dropdown" href=""   >
+                    <img src="{{needitem.editselectImage}}" ng-if="needitem.editselectImage" ng-model = "needitem.editselectImage" />
+                    <!-- <span ng-if="!needitem.editselectImage">Type</span> -->
+                  </a>
+                  <ul class="dropdown-menu dropdown-icons dropdown-str">
+                    <li ng-repeat="image in images" ng-click="editSelectType(image.url,image.value, needitem); structure.updateNeed(structure.Details_goal, structure.Details_task, needitem);">
+                      <a href="">
+                        <img src="{{image.url}}" class="img-responsive">
+                      </a>
+                    </li>
+                  </ul>
+                </td>
+                <td>
+                  <span  ng-show="needitem.shows" ng-hide = "needitem.varname1" >{{needitem.need_name}}
+                  </span>
+                  <input ng-show="needitem.shows " ng-if = "!needitem.need_name"  ng-click = "structure.hidename(needitem);" ng-hide = "needitem.varname1" class="edit needs_row add_need_row" ng-class="{'active': structure.selectedNeed == $index }">
+                  <input class="edit needs_row add_need_row" ng-click="needitem.varname1 = true" ng-model = "needitem.need_name" ng-blur = "structure.updateNeed(structure.Details_goal, structure.Details_task, needitem)" rows="4" cols="140" maxlength = "50"  ng-show = "needitem.varname" ng-class="{'active': structure.selectedNeed == $index }">
+                </td>
+                <td>
+                  <span  ng-show="needitem.shows" ng-hide = "needitem.varname1" >{{needitem.quantity}}
+                  </span>
+                </td>
+                <td>
+                  <img src="../images/icon-description.png" ng-click = "structure.showarea(needitem)" ng-if="needitem.need_decription" class="d-des-icon">
+                </td>
+                <td>
+                  <img src="../images/icon-delete.png" class="delete_need_icon" ng-click = "structure.deleteSuggestion_need(needitem.id)" ng-class="{'active': structure.selectedNeed == $index }">
+                </td>
+              </tr>
+              <tr>
+                <td colspan="6"  ng-show="needitem.needDescriptionArea " ng-click = "structure.showtextarea(needitem);">
+                  <span ng-hide = " needitem.needtextarea" class="d-desc-span">
+                    <span ng-show="needitem.needDescriptionArea " ng-click = "structure.showtextarea(needitem);">{{needitem.need_decription}}
+                    </span>
+                  </span>
+                  <div class="task_description need_description"  ng-show = "!structure.showForm && needitem.needtextarea && structure.selectedNeed == $index">
+                    <textarea class="form-control" ng-if="suggestion.needs.length"  placeholder="Need descrniption (max 190 words)" ng-model="needitem.need_decription" maxlength="190" ng-show="needitem.needtextarea && structure.selectedNeed == $index" ng-blur = "structure.hidearea(needitem);">
+                    </textarea>
+                    <div class="post">
+                      <button  type="button" class="btn btn-secondary pop_up_button edit-save-btn" ng-mousedown = "structure.updateNeed(structure.Details_goal, structure.Details_task, needitem); structure.hideForm(needitem); structure.hidefields();" ng-show="needitem.needtextarea && structure.selectedNeed == $index">Save
+                      </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </form>
+          <form name = "needForm" >
+            <tbody>
+              <tr>
+                <td class="text-center">
+                  <a href="" ng-click="structure.Priority()" ng-if="!structure.priority_value"> 
+                    <i class="fa fa-star-o fa-star-custom">
+                    </i>
+                  </a>
+                  <a href="" ng-click="structure.Priority()" ng-if="structure.priority_value"> 
+                    <i class="fa fa-star fa-star-custom">
+                    </i>
+                  </a>
+                </td>
+                <td>
+                  <div class="btn-group">
+                    <a class="btn-small dropdown-toggle" data-toggle="dropdown" href="">
+                      <img src="{{selectImage}}" ng-if="selectImage" class="d-s-icon" />
+                      <!-- <input type="hidden"> -->
+                      <span ng-if="!selectImage">Type
+                      </span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-icons dropdown-str">
+                      <li ng-repeat="image in images" ng-click=SelectType(image.url,image.value) >
+                        <a href="">
+                          <img src="{{image.url}}" class="img-responsive">
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+                <td>
+                  <input type="text" class="form-control" placeholder="Enter text(max 50 characters)" ng-model="structure.need.need_name" name = "needName" maxlength="50"/>
+                </td>
+                <td>
+                  <input type="text" min="0" class="form-control" placeholder="Qty" ng-model="structure.need.quantity" onkeypress="return (event.keyCode == 46 || event.keyCode == 8 ||( event.charCode >= 48 && event.charCode <= 57));"  name ="quantity" rows="4" cols="140" maxlength="4"/>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="6">
+                  <div class="task_description need_description textchange" >
+                    <!-- <a href=""> -->
+                    <img src="../images/icon-description.png" class="img-responsive">
+                    <textarea class="form-control" style="padding-left: 28px;"  placeholder="Need description (max 50 words)" ng-model="structure.need.need_decription" maxlength="190">
+                    </textarea>
+                    <div class="post">
+                      <button  type="button" class="btn btn-secondary pop_up_button" ng-click="structure.saveSuggectionNeed()"  ng-if="structure.checkUser()" >Save
+                      </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </form>
+      </table>
+<!-- //input feild -->
+</div>
+</div>
+</div>
+</form>
+<!-- structure suggestion task -->
+<div class="s-needs-sect" ng-if="structure.showSuggestion && structure.needssuguser && !structure.checkUser()">
+  <div class="task_detail needs_detail">
+    <div class="row" >
+      <div class="col-sm-5">
+        <a href="" ng-if="structure.sug_needs.length != 0">
+          <p>Needs
+          </p>
+        </a>
+      </div>
+      <div class="col-sm-5">
+        <div class="sug" ng-if = "structure.needssugShow &&  !structure.taskssugShow">
+          <span>Suggested by:
+            <a class="suggestion">{{structure.suggestion.name}}
+            </a>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <!-- <a href="">
+          <i class="material-icons material-arrow-up">keyboard_arrow_up
+          </i>
+          <i class="material-icons material-arrow-down">keyboard_arrow_down
+          </i>
+        </a> -->
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-fixed">
+        <thead>
+          <tr class="n-heading">
+            <th>Priority
+            </th>
+            <th>Type
+            </th>
+            <th>Needs
+            </th>
+            <th>Qty
+            </th>
+            <th>
+            </th>
+            <!-- <th></th> -->
+          </tr>
+        </thead>
+        <form name = "needForm" >
+          <tbody ng-repeat="needitem in structure.sug_needs" ng-click = "structure.highlightConNeed(needitem, $index);" ng-class="{'active': structure.selectedConNeed == $index }">
+            <tr>
+              <td class="text-center">
+                <a href="" ng-if="!needitem.priority"> 
+                  <i class="fa fa-star-o fa-star-custom">
+                  </i>
+                </a>
+                <a href="" ng-if="needitem.priority"> 
+                  <i class="fa fa-star fa-star-custom">
+                  </i>
+                </a>
+              </td>
+              <td>
+                <img src="../images/icon-moneybag.png"  ng-if="needitem.need_type == 'money'"  data-toggle="dropdown" ng-hide = "needitem.imageVar" ng-model = "needitem.editselectImage" ng-class="{'active': structure.selectedConNeed == $index }">
+                <img src="../images/icon-tool.png"  ng-if="needitem.need_type == 'material'"   data-toggle="dropdown" ng-hide = "needitem.imageVar" ng-model = "needitem.editselectImage" ng-class="{'active': structure.selectedConNeed == $index }">
+                <img src="../images/icon-manpower.png"  ng-if="needitem.need_type == 'man'" data-toggle="dropdown" ng-hide = "needitem.imageVar" ng-model = "needitem.editselectImage" ng-class="{'active': structure.selectedConNeed == $index }">
+                <input class="type_edit" ng-if = "needitem.need_type != 'man'  && needitem.need_type != 'money' && needitem.need_type != 'material'"   ng-hide = "needitem.imageVar" ng-click = "structure.editImage(needitem);" ng-model = "needitem.editselectImage" ng-class="{'active': structure.selectedConNeed == $index }">
+                <a class="btn-small dropdown-toggle" data-toggle="dropdown" href=""   >
+                  <img src="{{needitem.editselectImage}}" ng-if="needitem.editselectImage" ng-model = "needitem.editselectImage" ng-class="{'active': structure.selectedConNeed == $index }"/>
+                </a>
+                <ul class="dropdown-menu dropdown-icons">
+                  <li ng-repeat="image in images" ng-click="editSelectType(image.url,image.value, needitem); structure.updateNeed(structure.Details_goal, structure.Details_task, needitem);" ng-class="{'active': structure.selectedConNeed == $index }">
+                    <a href="">
+                      <img src="{{image.url}}" class="img-responsive" ng-class="{'active': structure.selectedConNeed == $index }">
+                    </a>
+                  </li>
+                </ul>
+              </td>
+              <td>
+                <span  ng-show="needitem.shows" ng-hide = "needitem.varname1" >{{needitem.need_name}}
+                </span>
+              </td>
+              <td ng-class="{'active': structure.selectedConNeed == $index }">
+                <p>
+                  <input class=" needs_row add_need_row" ng-model = "needitem.quantity" ng-readonly = "true" ng-class="{'active': structure.selectedConNeed == $index }" >
+                </p>
+              </td>
+              <td>
+                <img src="../images/icon-description.png" ng-show="needitem.need_decription " ng-click = "structure.showarea(needitem)" class="d-des-icon">
+              </td>
+            </tr>
+            <tr>
+              <td colspan="5"  ng-show="needitem.needDescriptionArea " ng-click = "structure.showtextarea(needitem);">
+                <span ng-hide = "needitem.needtextarea" >
+                  <div ng-show="needitem.needDescriptionArea " ng-click = "structure.showtextarea(needitem);">{{needitem.need_decription}}
+                  </div>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </form>
+      </table>
+</div>
+</div>
+</div>
+

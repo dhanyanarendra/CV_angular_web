@@ -1,0 +1,345 @@
+<nav class="navbar navbar-default navbar-fixed-top navbar-new-custom" ng-controller="HeaderCtrl as header">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#">
+        <img ng-src="../images/perrshape-pro-logo-60.png" ng-click="header.logo();" class="img-responsive">
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-if="headerName">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#dashboard_new" ng-click = "structure.getPage();">Dashboard </a></li>
+        <li><a href="#land">Discover</a></li>
+        <li><a href="#describe">Create Project</a></li>
+        <li>
+          <div id="new" class="dropdown a-dropdown">
+            <button class="dropdown-toggle" id="account-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <img ng-src="{{profileImage ? profileImage : 'images/image_placeholder_gray.png'}}" class="c-land img-responsive picture">
+              <span ng-if="headerName">{{userName}}</span>
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu dropdown-menu-categories" aria-labelledby="account-dropdown">
+                <li><a href="#followed_projects">Followed Projects</a></li>
+                <li><a href="#my_profile">My Profile</a></li>
+                <li class="divider"></li>
+                <li class="a-logout"><a href="#land" ng-click = "header.logout()">Logout</a></li>
+              </ul>
+            </div>
+          </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="container d-m-bottom">
+<div id="dashboard">
+    <div class="row project-pledge-header">
+      <div class="col-sm-4">
+        <div class="c-d-flow">
+          <a class="c-d-active" href="">
+            <span ng-click = "dashboard.getPage();">My Projects</span>
+          </a>
+          <a href="" ng-click="dashboard.myPledges()">
+            <span>My Pledges</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-8"></div>
+    </div>
+      <div class="row project-tiles-fields">
+        <div class="col-sm-3">
+          <div class="dropdown" ng-hide="dashboard.needsPageShow">
+            <button class="btn btn-primary btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown" >
+              <i class="fa fa-chevron-down fa-chevron-down-custom pull-right" ></i>{{listProjectsView}}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-categories" >
+              <li>
+                <a href=""  ng-click="unpublished = false; published = false; set('All Projects')">All Projects</a>
+              </li>
+              <li>
+                <a href=""  ng-click = "published = true; unpublished = false; set('Published Projects')">Published Projects</a>
+              </li>
+              <li>
+                <a href="" ng-click="unpublished = true; published = false; set('Unpublished Projects') ">Unpublished Projects</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="form-group col-sm-3">
+          <div class="inner-addon right-addon" ng-hide="dashboard.needsPageShow">
+            <i class="glyphicon glyphicon-search"></i>
+            <input ng-model = "query" type="text" placeholder="Search Projects" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2 my-projects-ts"></div>
+        <div class="col-sm-2 my-projects-ts" ng-click = "dashboard.listNeeds();">
+          <a href="#dashboard_new">
+            <img class="img-responsive icon-needs-normal" ng-src="../images/icon-needs-normal.png" >
+            Needs
+          </a>
+        </div>
+      </div>
+      <div class="flashMsg" ng-show="dashboard.flashmsg" >Your Project Has Been Successfully Deleted</div>
+
+      <div class="my-projects-tiles"  ng-show = "!dashboard.needsPageShow">
+      <div ng-show="listProjects.length==0"  ng-show="unpublished || published" class="pledgemsg text-center">No projects found </div>
+        <div class="row project-tiles-row" ng-hide = "unpublished || published">
+          <div class="col-sm-4" dir-paginate = "k in listProjects | filter: {title:query}| itemsPerPage:9" pagination-id="AllPagination">
+            <br />
+            <div class="dashboard-box" >
+              <div class="row top-8 dashbord-box-pad">
+                <div class="col-sm-12 box-heading" ng-show = "!dashboard.unpublishclick && !dashboard.unpublishclick1">
+                  <p style="white-space: pre;">{{k.title|limitTo: 19}}{{k.title.length > 20 ? '...' : ''}}</p>
+                </div>
+              </div>
+              <div  class="row">
+                <div class="col-sm-12">
+                  <div class="box-image">
+                    <img class="img-responsive" ng-src="{{k.image || 'images/image_placeholder_gray.png'}}">
+                  </div>
+                </div>
+              </div>
+              <div class="row top-8 footer-icons">
+                <div class="col-sm-4 col-xs-4">
+                  <a ng-click="dashboard.editProject(k.id, k.published)">
+                    <img ng-src="images/icon-edit.png"/><br/>
+                    <span>Edit</span>
+                  </a>
+                </div>
+                <div class="col-sm-4 col-xs-4" ng-show = "k.published === true;">
+                  <a href="">
+                    <img ng-src="images/icon-check-active.png">
+                    <br/>
+                    <span>Published</span>
+                  </a>
+                </div>
+                <div class="col-sm-4 col-xs-4" ng-show = "k.published === false;">
+                  <a href="">
+                    <img ng-src="images/icon-unpublished.png">
+                    <br/>
+                    <span>UnPublished</span>
+                  </a>
+                </div>
+                <!-- <div class="col-sm-4" >
+                  <a href="">
+                    <img src="images/icon-completed.png">
+                    <br/>
+                    <span>completed</span>
+                  </a>
+                </div> -->
+                <div class="col-sm-4 col-xs-4">
+                  <a href="">
+                    <img ng-src="images/icon-delete-normal.png" ng-click="dashboard.listdelete(k)">
+                    <br/>
+                    <span>Delete</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row project-tiles-row" ng-show = "published"  ng-show = "!dashboard.needsPageShow">
+          <div class="pledgemsg text-center" ng-show="(listProjects | filter: {published: true}).length == 0 && listProjects.length!=0">No projects found </div>
+          <div class="col-sm-4" dir-paginate = "l in listProjects| filter:{ published: true } | filter:{title:query}|itemsPerPage:9" pagination-id="publishePagination">
+            <div class="dashboard-box" >
+              <div class="row top-8 dashbord-box-pad">
+                <div class="col-sm-12 box-heading" ng-show = "!dashboard.unpublishclick && !dashboard.unpublishclick1">
+                  <p style="white-space: pre;">{{l.title|limitTo: 19}}{{l.title.length > 20 ? '...' : ''}}</p>
+                </div>
+              </div>
+              <!-- <div ng-if="l.length==0" class="pledgemsg text-center">No projects found></div> -->
+              <div  class="row">
+                <div class="col-sm-12">
+                  <div class="box-image">
+                    <img class="img-responsive" ng-src="{{l.image || 'images/image_placeholder_gray.png'}}">
+                  </div>
+                </div>
+              </div>
+              <div class="row top-8 footer-icons">
+                <div class="col-sm-4">
+                  <a href="">
+                    <img ng-src="images/icon-edit.png" ng-click = "dashboard.editProject(l.id);">
+                    <br/>
+                    <span>Edit</span>
+                  </a>
+                </div>
+                <div class="col-sm-4" ng-show = "published">
+                  <a href="">
+                    <img ng-src="images/icon-check.png">
+                    <br/>
+                    <span>Published</span>
+                  </a>
+                </div>
+                <div class="col-sm-4" ng-show = "unpublished">
+                  <a href="">
+                    <img ng-src="images/icon-unpublished.png">
+                    <br/>
+                    <span>UnPublished</span>
+                  </a>
+                </div>
+                <div class="col-sm-4">
+                  <a href="">
+                    <img ng-src="images/icon-delete-normal.png" ng-click="dashboard.listdelete(l)">
+                    <br/>
+                    <span>Delete</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <dir-pagination-controls ng-if="published"
+        max-size="5"
+        direction-links="true"
+        boundary-links="true" pagination-id="publishePagination">
+      </dir-pagination-controls>
+      <div class="row project-tiles-row dashboard-my-projects" ng-show = "unpublished"  ng-show = "!dashboard.needsPageShow" >
+        <div ng-show="(listProjects | filter: {published: false}).length == 0 && listProjects.length != 0" class="pledgemsg text-center">No projects found </div>
+        <div class="col-sm-4" dir-paginate = "m in listProjects | filter:{ published: false }|filter:{title:query}|itemsPerPage:9" pagination-id="unpublishedPagination">
+          <div class="dashboard-box" >
+            <div class="row top-8 dashbord-box-pad">
+              <div class="col-sm-12 box-heading" ng-show = "!dashboard.unpublishclick && !dashboard.unpublishclick1">
+                <p style="white-space: pre;">{{m.title|limitTo: 19}}{{m.title.length > 20 ? '...' : ''}}</p>
+              </div>
+            </div>
+            <div  class="row">
+              <div class="col-sm-12">
+                <div class="box-image">
+                  <img class="img-responsive" ng-src="{{m.image || 'images/image_placeholder_gray.png'}}">
+                </div>
+              </div>
+            </div>
+            <div class="row top-8 footer-icons">
+              <div class="col-sm-4">
+                <a href="">
+                  <img ng-src="images/icon-edit.png" ng-click = "dashboard.editProject(m.id);">
+                  <br/>
+                  <span>Edit</span>
+                </a>
+              </div>
+              <div class="col-sm-4" ng-show = "published">
+                <a href="">
+                  <img ng-src="images/icon-check.png">
+                  <br/>
+                  <span>Published</span>
+                </a>
+              </div>
+              <div class="col-sm-4" ng-show = "unpublished">
+                <a href="">
+                  <img ng-src="images/icon-unpublished.png">
+                  <br/>
+                  <span>UnPublished</span>
+                </a>
+              </div>
+              <div class="col-sm-4">
+                <a href="">
+                  <img ng-src="images/icon-delete-normal.png" ng-click="dashboard.listdelete(m)">
+                  <br/>
+                  <span>Delete</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <dir-pagination-controls  ng-if="unpublished"
+      max-size="5"
+      direction-links="true"
+      boundary-links="true" pagination-id="unpublishedPagination">
+    </dir-pagination-controls>
+        <!-- <div>
+          <ul class="pagination">
+            <li>
+              <a href="#">«&nbsp;Previous</a>
+            </li>
+            <li>
+              <a href="#">1</a>
+            </li>
+            <li>
+              <a href="#" class="active">2</a>
+            </li>
+            <li>
+              <a href="#">3</a>
+            </li>
+            <li>
+              <a href="#">4</a>
+            </li>
+            <li>
+              <a href="#">5</a>
+            </li>
+            <li>
+              <a href="#">Next&nbsp;»</a>
+            </li>
+          </ul>
+        </div> -->
+        <div>
+          <dir-pagination-controls ng-hide="unpublished || published"
+          max-size="5"
+          direction-links="true"
+          boundary-links="true" pagination-id="AllPagination">
+        </dir-pagination-controls>
+      </div>
+      <!-- {{((listProjects|filter:{title:query}).lenght)}} -->
+      <div  ng-show="((listProjects|filter:{title:query}).length == 0) && listProjects.length != 0">
+        <h2 align="center" class="like_icon_grey" ng-show="((listProjects|filter:{title:query}).length == 0) && listProjects.length != 0"> Sorry No Result Found </h2>
+      </div>
+    </div>
+</div>
+<div class="row" ng-show = "dashboard.needsPageShow">
+  <div class="col-sm-7 col-sm-offset-2">
+    <div id="dashboard-needs">
+      <div  ng-if = "!dashboard.dashboardArr.length">
+        <h2 align="center" class="like_icon_grey" ng-if = "!dashboard.dashboardArr.length">No needs found</h2>
+      </div>
+      <div ng-repeat = "projects in dashboard.dashboardArr track by $index" ng-if = "projects.needs.length">
+        <h5>{{projects.name}}</h5>
+        <div class="table-responsive">
+          <table class="table table-dneeds">
+            <thead>
+              <tr>
+                <td class="text-center">Type</td>
+                <td>Priority</td>
+                <td>Needs</td>
+                <td>Quantity</td>
+                <td>Total</td>
+              </tr>
+            </thead>
+            <tbody ng-repeat = "l in projects.needs| orderBy:['needType', 'needPriority != true']">
+              <tr>
+                <td class="text-center">
+                  <img ng-src="../images/icon-moneybag.png" ng-show ="l.needType === 'money'">
+
+                  <img ng-src="../images/icon-tool.png" ng-show ="l.needType === 'material'">
+
+                  <img ng-src="../images/icon-manpower.png" ng-show ="l.needType === 'man'">
+                </td>
+                <td>
+                  <i class="fa fa-star fa-star-custom icon-b" ng-show = "l.needPriority === true"></i>
+                  <i class="fa fa-star-o fa-star-custom icon-b"  ng-show = "l.needPriority === null"></i>
+                  <i class="fa fa-star-o fa-star-custom icon-b"  ng-show = "l.needPriority === false"></i>
+                </td>
+                <td>
+                  {{l.needName}}
+                </td>
+                <td class="quantity-total">
+                  {{l.quantity}}
+                </td>
+                <td class="quantity-total">
+                  {{l.tPledges}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<!-- NEEDS SECTION -->

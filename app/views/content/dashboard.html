@@ -1,0 +1,132 @@
+<nav class="navbar navbar-default navbar-fixed-top navbar-new-custom" ng-controller="HeaderCtrl as header">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#">
+        <img ng-src="../images/perrshape-pro-logo-60.png" ng-click="header.logo();" class="img-responsive">
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-if="headerName">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#dashboard_new" ng-click = "structure.getPage();">Dashboard </a></li>
+        <li><a href="#land">Discover</a></li>
+        <li><a href="#describe">Create Project</a></li>
+        <!-- <li><a href="#">Login</a></li>
+        <li><a href="#">sign up</a></li> -->
+        <li>
+          <div id="new" class="dropdown a-dropdown">
+            <button class="dropdown-toggle" id="account-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+
+              <img ng-src="{{profileImage ? profileImage : 'images/image_placeholder_gray.png'}}" class="c-land img-responsive picture">
+              <span ng-if="headerName">{{userName}}</span>
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu dropdown-menu-categories" aria-labelledby="account-dropdown">
+                <li><a href="#followed_projects">Followed Projects</a></li>
+                <li><a href="#my_profile">My Profile</a></li>
+                <li class="divider"></li>
+                <li class="a-logout"><a href="#land" ng-click = "header.logout()">Logout</a></li>
+              </ul>
+            </div>
+          </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div id="dashboard">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="c-d-flow">
+          <a class="c-d-active" href="">
+            <span>My Projects</span>
+          </a>
+          <a href="">
+            <span>My Pledges</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-8"></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-7">
+        <div class="dropdown-sort">
+          <div class="row">
+            <div class="col-sm-7"></div>
+            <div class="col-sm-5">
+              <div class="pull-right">
+                <div class="dropdown">
+                  <button class="btn btn-primary btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown">
+                    <i class="fa fa-chevron-down fa-chevron-down-custom pull-right"></i>
+                    {{listProjectsView}}
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-categories">
+                   <li>
+                    <a href="" ng-click="unpublished = false; published = false; set('All')">All</a>
+                  </li>
+                  <li>
+                    <a href="" ng-click="unpublished = true; published = false; set('Unpublished') ">Unpublished</a>
+                  </li>
+                  <li>
+                    <a href="" ng-click = "published = true; unpublished = false; set('Published')">Published</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-projects" ng-hide = "unpublished || published">
+        <div class="project-a" ng-repeat = "p in listProjects track by $index" >
+          <div class="row">
+            <div class="col-sm-10">
+              <span ng-show = "!dashboard.unpublishclick && !dashboard.unpublishclick1"> {{p.title}}</span>
+              <!-- {{dashboard.projects_count}} -->
+            </div>
+            <div class="col-sm-2">
+              <a href="">
+                <i class="material-icons" ng-click="dashboard.listdelete(p)">delete</i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-projects" ng-show = "published">
+        <div class="project-a" ng-repeat = "q in listProjects | filter:{ published: true }" >
+          <div class="row">
+            <div class="col-sm-10">
+              <span >  {{q.title}} </span>
+            </div>
+            <div class="col-sm-2">
+              <a href="">
+                <i class="material-icons" ng-click="dashboard.listdelete(q)">delete</i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="dashboard-projects" ng-show = "unpublished">
+        <div class="project-a" ng-repeat = "r in listProjects | filter:{ published: false }" >
+          <div class="row">
+            <div class="col-sm-10">
+              <span>{{r.title}}</span>
+            </div>
+            <div class="col-sm-2">
+              <a href="">
+                <i class="material-icons" ng-click= "dashboard.listdelete(r)">delete</i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-5"></div>
+  </div>
+</div>

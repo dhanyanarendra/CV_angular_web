@@ -1,0 +1,238 @@
+<ng-include src="'views/partials/project_header.html'"></ng-include>
+<div id="structure-contributor">
+  <div class="row">
+    <div class="col-sm-8"></div>
+    <div class="col-sm-4 text-right c-label">
+      <!-- <h3>Logged in as a Contributor</h3> -->
+    </div>
+  </div>
+  <div class="container">
+    <!-- contributor-describe-flow starts-->
+    <div class="row">
+      <div class="col-sm-4 s-c-top">
+        <div class="c-d-flow">
+          <a href="/#/contributor_describe" ng-click="contributor.describepage(contributor.project_name,contributor.category)">
+            <span>Describe</span>
+          </a>
+          <a href="/#/structure_contributor" ng-click="contributor.structurepage(contributor.project_name,contributor.category);">
+            <span>Structure</span>
+          </a>
+          <a href="#needs_contributor" class="c-d-active">
+            <span>Needs</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-8"></div>
+    </div>
+    <div class="describe_heading project_name ">{{contributor.project_name}}
+      <span class="category_name">{{contributor.category}}</span>
+    </div>
+    <!-- NEEDS SECTION -->
+    <div id="structure-needs">
+      <div class="row">
+        <div class="col-sm-7">
+          <div  class="n-c-table">
+            <div class="table-responsive" >
+              <p>Needs</p>
+              <table class="table table-dneeds">
+                <thead>
+                  <tr>
+                    <td class="text-center">Type</td>
+                    <td>Priority</td>
+                    <td>Needs</td>
+                    <td>Quantity</td>
+                    <td>Total</td>
+                    <td>Pledge</td>
+                    <td></td>
+                  </tr>
+                </thead>
+                <tbody ng-repeat = "needlist in contributor.needList | orderBy: 'created_at'">
+
+                  <tr class="published-post" ng-click="contributor.pledgedUser(needlist.id, $index);contributor.needDetails(this.needlist)" ng-class="{'highlight': contributor.highlightIndex == $index}">
+
+                    <td class="text-center">
+                      <img ng-src="../images/icon-moneybag.png" ng-show ="needlist.need_type === 'money'">
+                      <img ng-src="../images/icon-tool.png" ng-show ="needlist.need_type === 'material'">
+                      <img ng-src="../images/icon-manpower.png" ng-show ="needlist.need_type === 'man'">
+                    </td>
+                    <td ng-click="contributor.pledgedUser(needlist.id);">
+                      <i class="fa fa-star fa-star-custom icon-b" ng-show = "needlist.priority === true"></i>
+                      <i class="fa fa-star-o fa-star-custom icon-b"  ng-show = "needlist.priority === null"></i>
+                      <i class="fa fa-star-o fa-star-custom icon-b"  ng-show = "needlist.priority === false"></i>
+                    </td>
+                    <td ng-click="contributor.pledgedUser(needlist.id);" class="n-d-width">
+                      {{needlist.need_name}}
+                    </td>
+                    <td class="quantity-total" ng-click="contributor.pledgedUser(needlist.id);">
+                      {{needlist.total_quantity}}
+                    </td>
+                    <td class="quantity-total" ng-click="contributor.pledgedUser(needlist.id);">
+                      {{needlist.quantity}}
+                    </td>
+
+                    <td>
+                      <input ng-if="needlist.user_pledged" class="form-control published-post" ng-model="needlist.new_quantity" placeholder="00" min="1" type="text" onkeypress="return (event.keyCode == 46 || event.keyCode == 8 ||( event.charCode >= 48 && event.charCode <= 57));" ng-pattern = "/^[0-9]+[0-9]*$/ " ng-class="{'highlight': contributor.highlightIndex == $index}">
+
+                      <input ng-if="!needlist.user_pledged" class="form-control published-post unpledge-no-border" ng-model="needlist.new_quantity" placeholder="00" min="1" type="text" onkeypress="return (event.keyCode == 46 || event.keyCode == 8 ||( event.charCode >= 48 && event.charCode <= 57));" ng-pattern = "/^[0-9]+[0-9]*$/ " ng-class="{'highlight': contributor.highlightIndex == $index}">
+
+                      <span ng-bind="needlist.pledge[0].new_quantity" ng-if="needlist.user_pledged"></span>
+                    </td>
+
+
+                    <td class="text-left">
+                      <img ng-src="../images/icon-pledge-off.png" ng-if="needlist.user_pledged"  class="needs_pledge need_pledgeicon">
+                      <img ng-src="../images/icon-pledge-on.png" ng-if="!needlist.user_pledged"  class="needs_pledge">
+
+                      <button type="button" class="btn btn-info btn-pledge" ng-click="pledgequantity(true, needlist);reload()"
+                      ng-if="needlist.user_pledged" ng-disabled="!needlist.new_quantity || needlist.new_quantity < 1 || needlist.new_quantity.$error.pattern">pledge
+                    </button>
+                    <button type="button"  ng-click="pledgequantity(false, needlist);reload()" class="btn btn-info btn-pledge" ng-if="!needlist.user_pledged" >Unpledge</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <span ng-show="contributor.needList.length == 0">
+           <h4>
+            No Needs Found
+          </h4>
+        </span>
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <div class="n-c-comments">
+        <div class="row n-c-comment-title">
+          <div class="col-sm-8"></div>
+          <div class="col-sm-4 text-right">
+            <a href="">
+              <!-- <img src="../images/user-group-icon.png" class="img-responsive"> -->
+
+              <img ng-src="../images/user-group-icon--active.png" ng-click="contributor.userIcon();contributor.reload()">
+            </a>
+            <a href="">
+              <img ng-src="../images/commens-icon.png" ng-click="contributor.commentIcon()">
+              <!-- <img src="../images/commens-icon-active.png" class="img-responsive"> -->
+            </a>
+          </div>
+        </div>
+        <div class="com">
+          <div class="commented-users" ng-hide="contributor.showDiv">
+            <p>Comments</p>
+            <div class="row">
+              <div class="col-sm-11">
+                <a href="">
+                  <img required="" class="img-responsive n-com-img" src="../images/icon-comments.png">
+                </a>
+                <form name="need-comment">
+                  <textarea required="" maxlength="175" cols="100" rows="4" placeholder="Add Comments (max 100 words)" class="form-control comment" ng-model="need.description" disabled="disabled"></textarea>
+                  <button class="btn btn-secondary comment" ng-click="contributor.addNeedComment(need)" type="button" disabled="disabled">Comment</button>
+                </form>
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+               <div class="n-c-d-comments" ng-repeat="comment in contributor.needcomments">
+                <div class="row">
+                  <div class="col-md-1 text-center">
+                    <div>
+
+                      <img ng-src ="{{comment.commented_image.file.url  || 'images/image_placeholder_gray.png'}}" class="c-comment image">
+                    </div>
+                  </div>
+                  <div class="col-md-10">
+                    <div class="p-comment">
+                      <span class="user-comments">{{comment.commented_name}}</span>
+                      <span class="comment-date">{{comment.created_at | date: 'MMMM dd, yyyy'}}</span>
+                      <div class="p-u-comment" ><hm-read-more
+                        hm-text="{{ comment.body_description }}"
+                        hm-limit="50"
+                        hm-more-text="MORE"
+                        hm-less-text="LESS"
+                        hm-dots-class="dots"
+                        hm-link-class="links">{{comment.body_description}}
+                      </hm-read-more>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="col-md-1"></div> -->
+                <div >
+                  <a href="">
+                    <img src="../images/trash.png" ng-click="contributor.deleteNeedComment(comment)" ng-if="comment.commented_name === userName">
+                  </a>
+                  <a href="">
+                    <img src="../images/trash.png" ng-click="contributor.deleteNeedComment(comment)" ng-if="userName === userOriginatorName && comment.commented_name != userName">
+                  </a>
+                </div>
+                <!-- <div class="col-md-1"></div> -->
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <div class="no-comments no-pledge" ng-show="contributor.commentedList == false">
+          <div class="row">
+            <div class="col-sm-8 col-xs-8 col-sm-offset-4 col-xs-offset-2">
+              <img src="../images/icon-no-comments.png">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+              <h4>
+                none of the users commented for this need.
+              </h4>
+            </div>
+            <div class="col-sm-1"></div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="com n-pledged-users" ng-show="contributor.showDiv">
+        <p>Pledged Users</p>
+        <div class="row" ng-repeat="pledgeuser in contributor.pledgesUserList track by $index" ng-if="contributor.pledgedList" >
+          <div class="col-sm-12">
+           <div class="n-c-d-comments">
+            <div class="row">
+              <div class="col-md-2 text-center">
+                <div>
+
+                  <img ng-src ="{{pledgeuser.pledgeed_image.file.url  || 'images/image_placeholder_gray.png'}}" class="c-comment image">
+                </div>
+              </div>
+              <div class="col-md-9">
+                <a href="">
+                  <h5>{{pledgeuser.pledgeed_name}}</h5>
+                </a>
+              </div>
+              <div class="col-md-1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="no-comments no-pledge" ng-if="contributor.pledgedList == false">
+        <div class="row">
+          <div class="col-sm-8 col-xs-8 col-sm-offset-4 col-xs-offset-2" >
+            <img src="../images/icon-no-users.png">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-1"></div>
+          <div class="col-sm-10">
+            <h4>
+              no pledged users to display.
+            </h4>
+          </div>
+          <div class="col-sm-1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>

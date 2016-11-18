@@ -1,0 +1,78 @@
+<a href="" data-toggle="modal" data-target="#myModal_Signup" ng-click="header.setLoginPath('loginlink')">sign up </a>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal_Signup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="signupCtrl as signup">
+  <div class="modal-dialog modal-dialog-custom" role="document">
+    <div class="modal-content modal-content-custom">
+      <div class="modal-header modal-signup-header">
+        <button type="button" class="close"  ng-click = "signup.cleardata()" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="icon-close"></i></span></button>
+        <img src="images/perrshape-pro-logo-47.png" class="signup-header-logo">
+      </div>
+      <br />
+      <div id="sign_up">
+        <div class="modal-body modal-body-custom">
+          <form name="signupForm">
+            <div class="row">
+              <!-- <div class="col-sm-2"></div> -->
+
+              <div class="col-sm-9 col-xs-10 center-column">
+                <div class="form-group">
+                  <input type="text" autocomplete="off" class="signup_form" placeholder="Username" ng-model="signup.signupForm.username" ng-change="signup.remove();" tabindex="1" required ng-keyup="signup.keyPresssignup($event)"/>
+
+                  <span style="color:#a94442" ng-show="!signup.signupForm.username.length && signup.submitted" class="control-label err-msg" for="inputError">Please enter your username</span>
+
+                  <span style="color:#a94442" ng-show="signup.signupForm.username.length < 8 && signup.submitted" class="err-msg">Username must have at least 8 characters</span>
+
+                  <span style="color:#a94442" ng-show="signup.signupForm.username.length > 32 && signup.submitted" class="err-msg">Username can have maximum 32 characters</span>
+
+                  <div style="color:#a94442" ng-if="signup.errorMsgFlagUserName" class="err-msg"> Username already taken</div>
+                </div>
+
+                <div class="form-group">
+                  <input type="text" autocomplete="off" class="email_form email_form_signup" tabindex="2" placeholder="E-mail" name="email" ng-model="signup.signupForm.email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" ng-change="signup.removeEmail();" ng-keyup="signup.keyPresssignup($event)" required/>
+                  <span style="color:#a94442" class="err-msg" ng-show="signupForm.email.$error.pattern && signup.submitted">Not a valid email address</span>
+                  <span style="color:#a94442" class="err-msg"  ng-show="signupForm.email.$error.required && signup.submitted">Please enter your email address</span>
+
+                  <div style="color:#a94442" class="err-msg" ng-if="signup.errorMsgFlagEmail">Email already taken</div>
+                </div>
+                <div class="form-group">
+
+                  <a href="#" ng-click="signup.togglePwd()" class="show_signup">Show</a>
+                  <input autocomplete="off" ng-show="!signup.showpassword"  name="password" type="{{inputType}}" class="password_form signupspace" placeholder="Password" tabindex="3" ng-pattern="/^[a-zA-Z0-9\-_@.#$&!*^%+<>():;,-]{8,}$/" ng-model="signup.signupForm.password" ng-keyup="signup.keyPresssignup($event)"required />
+
+                  <input ng-show="signup.showpassword"  type="text" class="password_form" placeholder="Password" ng-model="signup.signupForm.password" required ng-keyup="signup.keyPresssignup($event)"/>
+                  <span style="color:#a94442" ng-show="signupForm.password.$error.required && signup.submitted" class="error_message_signup signupspace err-msg">Please enter your password</span>
+
+                  <span style="color:#a94442" class="err-msg" ng-show="signup.submitted && signupForm.password.$error.pattern"> Atleast 8 characters,No space</span>
+
+                </div>
+
+              </div>
+              <br />
+
+              <br />
+              <p class="signup-notes">
+                <label>
+                 By signing up, I agree to PeerShape's <a ng-href="#termsandconditions" onclick="window.location.reload(true);" class="signup-notes-links">Terms of Service</a>
+
+                  and <a ng-href="#privacypolicy" onclick="window.location.reload(true);" class="signup-notes-links">Privacy Policy</a>.
+               </label>
+             </p>
+             <div class="row">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-6 button-center">
+                <button type="button" tabindex="4" id="signup-btn" class="btn btn-info btn-info-custom" ng-click="signup.register(); signup.submitted = true">Sign Up</button>
+              </div>
+              <div class="col-sm-3"></div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer modal-signup-footer">
+        <p>Already have an account?<a href="#" id="login-link" data-toggle="modal" ng-click = "signup.close()">&nbsp;Login</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Ends -->

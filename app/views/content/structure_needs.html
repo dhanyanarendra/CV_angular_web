@@ -1,0 +1,72 @@
+<ng-include src="'views/partials/project_header.html'"></ng-include>
+<div id="structure-contributor">
+  <div class="row">
+    <div class="col-sm-8"></div>
+    <div class="col-sm-4 text-right c-label">
+      <!-- <h3>Logged in as a Contributor</h3> -->
+    </div>
+  </div>
+  <div class="container">
+    <!-- contributor-describe-flow starts-->
+    <div class="row">
+      <div class="col-sm-4 s-c-top">
+        <div class="c-d-flow">
+          <a href="/#/contributor_describe" ng-click="contributor.describepage(contributor.project_name,contributor.category)";>
+            <span>Describe</span>
+          </a>
+          <a href="">
+            <span>Structure</span>
+          </a>
+          <a href="" class="c-d-active">
+           <span>Needs</span>
+         </a>
+       </div>
+     </div>
+     <div class="col-sm-8"></div>
+   </div>
+   <div class="describe_heading project_name ">{{project_name}}
+     <span class="category_name">{{category}}</span>
+   </div>
+   <!-- NEEDS SECTION -->
+   <div id="structure-needs">
+     <div class="table-responsive">
+      <table class="table table-dneeds">
+        <thead>
+          <tr>
+            <td class="text-center">Type</td>
+            <td>Priority</td>
+            <td>Needs</td>
+            <td>Quantity</td>
+            <td>Pledge</td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">
+              <img ng-src="../images/icon-moneybag.png">
+            </td>
+            <td>
+              <i class="fa fa-star fa-star-custom icon-b"></i>
+            </td>
+            <td>
+              Fund
+            </td>
+            <td class="quantity-total">
+              07
+              <!-- <input  class="form-control" placeholder="00" min="1" type="text">   -->
+            </td>
+            <td class="quantity-total">
+              15
+            </td>
+            <td class="text-center">
+              <button type="button" class="btn btn-info btn-pledge">pledge</button>
+              <!-- <button type="button" class="btn btn-info btn-pledge">Unpledge</button> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

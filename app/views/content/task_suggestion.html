@@ -1,0 +1,134 @@
+<div class="s-pool">Suggestion Pool</div>
+
+<div ng-if="structure.user_id == structure.user_originator_id">
+
+  <div class="col-xs-10 s-c-goal s-c-task s-pool-task " ng-repeat="suggestion in structure.suggestions|orderBy:created_at" ng-init="parentindex=$index" ng-click = "structure.suggestionNeedHighlight(suggestion, $index);structure.setDragTask(suggestion);" ng-class="{'active':  structure.suggestionSelected_id === $index}" data-drag="true" jqyoui-draggable="{onStart:'structure.dragCallback(suggestion)', animate: false}" data-jqyoui-options="{revert: 'invalid'}" ng-if="!suggestion.draged" taskid="{{suggestion}}">
+
+
+    <a href="" ng-if="structure.likeStatus(suggestion)" ng-click="structure.like_sugproject(false,suggestion.id)"><i class="material-icons"  style="color: rgb(88, 144, 255);" >thumb_up</i>
+      <span ng-show='suggestion.likes.length > 0'>{{suggestion.likes.length}}</span></a>
+
+      <a href="" ng-if="!structure.likeStatus(suggestion)" ng-click="structure.like_sugproject(true,suggestion.id)"><i class="material-icons"  style="color:grey;" >thumb_up</i><span ng-show='suggestion.likes.length > 0'>{{suggestion.likes.length}}</span></a>
+
+      <span ng-bind="suggestion.suggestion_title" ng-click="structure.showSuggestionDetails(suggestion)" class="s-pool-span"></span>
+      <div class="text-right task-icons sug-task-icons">
+        <ul class="list-inline">
+          <li>
+            <a href="" ng-bind= "suggestion.date | date:'MMM d'">
+            </a>
+          </li>
+          <li>
+            <a>
+              <img ng-src="../images/icon-task-details.png" ng-if="structure.showTaskIcon(suggestion) && structure.checkUser()" ng-click="structure.showsugTasks(suggestion);" class="img-responsive sugtask-icon">
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <img ng-src="../images/icon-needs.png" class="img-responsive sugneed-icon" ng-click="structure.showsugNeeds(suggestion);" ng-if="suggestion.needs.length && structure.checkUser()" required>
+
+            </a>
+          </li>
+
+          <!-- <li>
+            <a>
+              <img src="../images/icon-task-details.png" ng-if="structure.showTaskIcon(suggestion) && !structure.checkUser()" ng-click="structure.showsuguser(suggestion);" class="img-responsive sugtask-icon">
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <img src="../images/icon-needs.png" class="img-responsive sugneed-icon" ng-click="structure.showneeduser(suggestion);" ng-if="suggestion.needs.length && !structure.checkUser()" required>
+
+            </a>
+          </li> -->
+          <li>
+            <a href="">
+              <img ng-src="../images/icon-delete.png" class="img-responsive sugneed-icon" ng-click="structure.deleteSuggestionTask(suggestion)" ng-if="suggestion.user_id == structure.user_id">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+  <div role="tab" class="addgoalrow" ng-if="structure.suggestionRow">
+    <div class="text-left">
+      <form name="goalForm"  ng-submit="structure.addSuggestion(structure.suggestion)">
+        <input type="text" ng-class="{'active': structure.NewTask === true}" ng-model="structure.suggestion.suggestion_title" class="addgoaltxt" focus="true" placeholder= "Type Enter or add Details to save" name="goal" ng-blur="structure.fadeOut();structure.addSuggestion(structure.suggestion);structure.showSuggestionDetails(suggestion)" maxlength="50" required/>
+      </form>
+    </div>
+  </div>
+  <div class="col-xs-10 add_goal pool-add-goal click" ng-if="!structure.suggestionRow">
+    <i class="material-icons icon-add-goal" ng-click="structure.addSuggestionRow(true)">add_circle_outline</i>
+    <span ng-click="structure.addSuggestionRow(true); structure.resetsugg();">Suggest Task</span>
+  </div>
+  </div>
+</div>
+<!-- </div>
+</div>
+</div> -->
+
+
+
+
+
+<div ng-if="structure.user_id != structure.user_originator_id">
+  <div class="s-c-goal s-c-task s-pool-task" ng-repeat="suggestion in structure.suggestions" ng-init="parentindex=$index" ng-click = " structure.suggestionNeedHighlight(suggestion, $index);structure.setDragTask(suggestion);structure.highlightedStatus(suggestion,$index)" ng-class="{'active':  (structure.suggestionSelected_id === $index || structure.suggestTaskEmpty === $index)}">
+
+    <a href="" ng-if="structure.likeStatus(suggestion)" ng-click="structure.like_sugproject(false,suggestion.id)"><i class="material-icons"  style="color: rgb(88, 144, 255);" >thumb_up</i>
+      <span ng-show='suggestion.likes.length > 0'>{{suggestion.likes.length}}</span></a>
+
+      <a href="" ng-if="!structure.likeStatus(suggestion)" ng-click="structure.like_sugproject(true,suggestion.id)"><i class="material-icons"  style="color:grey;" >thumb_up</i><span ng-show='suggestion.likes.length > 0'>{{suggestion.likes.length}}</span></a>
+
+      <span ng-bind="suggestion.suggestion_title" ng-click="structure.showSuggestionDetails(suggestion)" class="s-pool-span"></span>
+      <div class="text-right task-icons sug-task-icons">
+        <ul class="list-inline">
+          <li>
+            <a href="" ng-bind= "suggestion.date | date:'MMM d'">
+            </a>
+          </li>
+          <li>
+            <a>
+              <img ng-src="../images/icon-task-details.png"  ng-if="structure.showTaskIcon(suggestion) && structure.checkUser()" ng-click="structure.showsugTasks(suggestion);" class="img-responsive sugtask-icon">
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <img ng-src="../images/icon-needs.png" class="img-responsive sugneed-icon" ng-click="structure.showsugNeeds(suggestion);" ng-if="suggestion.needs.length && structure.checkUser()" required>
+
+            </a>
+          </li>
+
+          <li>
+            <a>
+              <img ng-src="../images/icon-task-details.png" ng-if="structure.showTaskIcon(suggestion) && !structure.checkUser()" ng-click="structure.showsuguser(suggestion);" class="img-responsive sugtask-icon">
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <img ng-src="../images/icon-needs.png" class="img-responsive sugneed-icon" ng-click="structure.showneeduser(suggestion);" ng-if="suggestion.needs.length && !structure.checkUser()" required>
+
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <img ng-src="../images/icon-delete.png" class="img-responsive sugneed-icon" ng-click="structure.deleteSuggestionTask(suggestion)" ng-if="suggestion.user_id == structure.user_id">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div role="tab" class="addgoalrow" ng-if="structure.suggestionRow">
+      <div class="text-left">
+        <form name="goalForm" ng-submit="structure.addSuggestion(structure.suggestion)">
+          <input type="text" ng-model="structure.suggestion.suggestion_title"  class="addgoaltxt" focus="true" ng-class="{'active': structure.NewTask === true}" placeholder="Type Enter or add Details to save" name="goal" ng-blur="structure.addSuggestion(structure.suggestion); structure.fadeOut();structure.showSuggestionDetails(suggestion)" maxlength="50" required/>
+        </form>
+      </div>
+    </div>
+    <div class="add_goal pool-add-goal click" ng-if="!structure.suggestionRow">
+      <i class="material-icons icon-add-goal" ng-click="structure.addSuggestionRow(true)">add_circle_outline</i>
+      <span ng-click="structure.addSuggestionRow(true); structure.resetsugg();">Suggest Task</span>
+    </div>
+</div>
+  <!-- </div> -->
+<!-- </div>
+</div> -->

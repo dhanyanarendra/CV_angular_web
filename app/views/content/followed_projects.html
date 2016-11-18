@@ -1,0 +1,91 @@
+<div ng-controller="FollowProjectsCtrl as FollowProjects">
+  <!-- required code -->
+  <div class="container">
+    <div class="followed-projects">
+      <div class="row search-margin">
+
+        <div class="col-sm-3">
+          <div class="dropdown" ng-show="!FollowProjects.noFollowedProjects">
+            <button class="btn btn-primary btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-chevron-down fa-chevron-down-custom pull-right"></i>
+              {{displayCategory}}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-categories">
+              <li ng-repeat="category in categories" ng-click="setDisplayCategory(category)"><a href="">{{category}}</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3 new-pulrt"  ng-show="!FollowProjects.noFollowedProjects">
+          <input ng-model = "query" type="text" class="form-control form-custom search search_width"  id="inputSearch" ng-click="FollowProjects.errMsg();" placeholder="Search Projects" required autofocus >
+        </div>
+        <div class="col-sm-3 box-margin">
+          <div class="display pull-right">
+            <div class="dropdown" ng-show="!FollowProjects.noFollowedProjects">
+              <button class="btn btn-primary btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown" ><i class="fa fa-chevron-down fa-chevron-down-custom pull-right"></i>
+                {{selectDate}}
+              </button>
+              <ul class="dropdown-menu dropdown-menu-categories">
+                <li ng-click="setOrderByValue('All Dates')"><a href="">All Dates</a></li>
+                <li ng-click="setOrderByValue('Latest First')"><a href="">Latest First</a></li>
+                <li ng-click="setOrderByValue('Oldest First')"><a href="">Oldest First</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <br />
+      <div>
+        <div class="row">
+          <div ng-if="FollowProjects.showNoResultsPanel">
+            <!-- <h2 align="center" style="color:grey;"> No Project found in this category</h2> -->
+          </div>
+          <div class="col-sm-4" dir-paginate="tile in followedtiles|itemsPerPage:9|filter:{title:query}| orderBy:orderByVar" style="padding-bottom: 10px;" ng-show="canBeDisplayed(tile.category)">
+
+            <div class="dashboard-box">
+              <div class="row top-8 dashbord-box-pad" ng-click="FollowProjects.gotoContributor(tile)">
+                <div class="col-sm-6 box-heading">
+                  <p style="white-space: pre;">{{tile.title|limitTo: 15}}{{tile.title.length > 20 ? '...' : ''}}</p>
+                </div>
+                <div class="col-sm-6 box-heading-right text-right">
+                  <p><span class="head-text alignright">{{tile.category}}</span>
+                  </div>
+                </div>
+                <div class="row" ng-click="FollowProjects.gotoContributor(tile)">
+                  <div class="col-sm-12">
+                    <div class="box-image">
+                      <img ng-src="{{tile.file.url || 'images/image_placeholder_gray.png'}}" class="img-responsive">
+                    </div>
+                  </div>
+                </div>
+                <div class="row dashbord-box-pad-top top-8">
+                  <div class="col-sm-12">
+                    <p class="box-text">{{tile.short_description|limitTo: 57}}{{tile.short_description.length > 20 ? '...' : ''}}</p>
+
+                  </div>
+                </div>
+
+                <div class="row dashbord-box-pad top-8 footer-icons">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <dir-pagination-controls  ng-if="((followedtiles|filter:{title:query}).length > 9)  && !FollowProjects.showNoResultsPanel"
+          max-size="2"
+          direction-links="true"
+          boundary-links="true">
+        </dir-pagination-controls>
+
+        <div ng-if="!(followedtiles|filter:{title:query}).length">
+          <h2 align="center" style="color:grey;" ng-show="FollowProjects.Msg"> Sorry No Result Found </h2>
+        </div>
+        <h2 align="center" style="color:grey;" ng-if="FollowProjects.noFollowedProjects"> You are not following any project yet. </h2>
+
+        <br />
+        <br />
+        <br />
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,45 @@
+<ng-include src="'views/partials/project_header.html'"></ng-include>
+  <div id="describe-content">
+    <div class="container">
+     <br>
+     <br>
+     <div class="progress_bar">
+      <span class="flowCircle">1</span>
+      <a href="" class="flow"><span>Describe</span></a>
+      <span class="flowCircle flowCircle_margin" ng-class="{blue: hover}"
+      ng-selected="hover = true">2</span>
+      <a href="#structure" class="flow"><span  ng-class="{red: hover}"
+       ng-selected="hover = true">Structure</span></a>
+     </div>
+     <hr>
+     <!--  <p class="profile_name">Describe</p> -->
+     <div class="describe_heading project_name">{{structure.title}}</div>
+
+     <!-- <button ng-click="structure.openTasks(true)">Open</button> -->
+     <div class="container">
+       <div class="row fullpanel">
+        <div id="leftpanel" ng-class="structure.pageview ? 'leftpanel fullpage' : 'leftpanel halfpage'">
+         <ng-include src="'views/partials/strcture/leftpanel.html'"></ng-include>
+       </div>
+       <div class="rightpanel" ng-class="structure.pageview ? 'rightpanel hide' : 'rightpanel halfpage'">
+         <!--<button ng-click="structure.changePageView(true)">X</button>-->
+         <ng-include src="'views/partials/strcture/rightpanel.html'"></ng-include>
+       </div>
+     </div>
+   </div>
+ </div>
+ <div class="row">
+  <div class="col-sm-6">
+  </div>
+  <div class="col-sm-6">
+   <div id="structure_button">
+    <button type="button" class="btn btn-warning-outline" ng-hide="publishedStatus" ng-click = "structure.draftpage();">Save and Quit</button>
+    <button class="btn btn-info btn-info-custom btn-next" type="button"  ng-click = "nextPage();">Publish&nbsp;<i class="next_icon"></i></button>
+  </div>
+</div>
+</div>
+<br/>
+</div>
+</div>
+</div>
+

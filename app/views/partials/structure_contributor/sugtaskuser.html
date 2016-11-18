@@ -1,0 +1,101 @@
+<!-- Suggestion Task -->
+<form id="sugtaskreset">
+  <div id="task_details_sec" ng-if="structure.showSuggestion && structure.taskssuguser && !structure.checkUser()">
+    <!-- <div id="s-c-right" class="s-c-g-bg"> -->
+    <div class="s-c-tborder">
+      <div class="task_detail">
+        <div class="row task_border">
+          <div class="col-sm-5">
+            <a href="" >
+              <p>Task Details
+              </p>
+            </a>
+          </div>
+          <div class="col-sm-5">
+            <div class="sug">
+              <span>Suggested by:
+                <a class="suggestion">{{structure.suggestion.name}}
+                </a>
+              </span>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <a href="">
+              <i class="material-icons material-arrow-up">keyboard_arrow_up
+              </i>
+              <i class="material-icons material-arrow-down">keyboard_arrow_down
+              </i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="datetimezone">
+        <div class="row">
+          <div class="col-sm-5 col-xs-6 lborder">
+            <div class="fleft">
+              <img ng-src="../images/icon-date.png" class="img-responsive">
+              <!-- <i class="material-icons material-date-range date-icon">date_range</i> -->
+            </div>
+            <div class="fleft lborder" >
+              <datepicker date-format="dd-MM-yyyy" >
+                <input ng-model="structure.suggestion.date" id="txtdate" type="text" ng-readonly="true" placeholder="dd-mm-yyyy" >
+              </datepicker>
+            </div>
+          </div>
+          <div class="col-sm-5 col-xs-6 lborder">
+            <div class="fleft">
+              <img ng-src="../images/icon-time.png" class="img-responsive">
+              <!-- <i class="material-icons material-date-range date-icon">schedule</i> -->
+            </div>
+            <div class="fleft lborder">
+              <input  ui-timepicker="timePickerOptions" ng-model="structure.suggestion.time"  ng-readonly="true"  type="text" placeholder="hh:mm am/pm">
+            </div>
+          </div>
+          <div class="col-sm-2 col-xs-6">
+            <div class="fleft">
+              <input  ng-model="structure.suggestion.timezone" type="text"  ng-readonly="true" placeholder="Duration">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="locations sugtask-locations">
+        <div class="fleft location-task">
+          <img ng-src="../images/icon-location.png" class="img-responsive">
+          <input ng-model = "structure.suggestion.venue" maxlength="70" type="text"  ng-readonly="true" placeholder="location">
+        </div>
+      </div>
+      <div class="task_description sugtask-description">
+        <div class="row">
+          <div class="col-sm-11">
+            <a href="" >
+              <img ng-src="../images/icon-description.png" class="img-responsive" ng-hide= "structure.sugdone" ng-show = "structure.sugtextarea" required>
+              <!-- <i class="material-icons material-chat" ng-hide= "structure.done" ng-show = "structure.textarea" required>chat</i> -->
+            </a>
+            <div ng-if="structure.sugdone" class="structure_description_display" ng-click = "structure.sugtest();">
+              <div class="fleft click">
+                <img ng-src="../images/icon-description.png" class="img-responsive" ng-if="structure.suggestion.description.length > 0">
+                <!-- <i class="material-icons material-chat material-chat-description" ng-if="structure.description.length > 0">chat</i> -->
+              </div>
+              <div class="task_description_display" ng-readonly="true" ng-if="structure.suggestion.description.length > 0" >{{structure.suggestion.description}}
+              </div>
+            </div>
+            <form name="text_description">
+              <textarea  ng-model = "structure.suggestion.description" class= "form-control" placeholder="Task description (max 100 words)" ng-if="!structure.sugdone" rows="4" cols="100" maxlength="175" ng-readonly="true"  >
+              </textarea>
+              <!-- Below is the post button -->
+                <button type="button" class="btn btn-secondary pop_up_button"  ng-if="structure.checkUser()" ng-click = "structure.updateSuggestion();">Save
+                </button>
+              <!--end of post button  -->
+            </form>
+          </div>
+          <!-- <div class="col-sm-1"></div> -->
+          <!-- </div> -->
+        </div>
+        <div class="row task_border_end">
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+    <!-- <div class="row task_border_end"></div> -->
+  </div>
+</form>

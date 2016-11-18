@@ -1,0 +1,83 @@
+<div class="s-c-tborder" ng-if="!structure.showSuggestion">
+  <div class="task_detail">
+    <div class="row task_border">
+      <div class="col-sm-5">
+        <div>
+          <a href="" >
+            <p>Task Details
+            </p>
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-5">
+        <div class="sug" ng-if="structure.user">
+          <span>Suggested by:
+            <a class="suggestion">{{structure.user}}
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="datetimezone" ng-if="structure.date.length > 0">
+    <div class="tasklocation">
+      <div class="fleft">
+        <img ng-src="../images/icon-date.png" class="img-responsive">
+        <!-- <i class="material-icons material-date-range date-icon">date_range</i> -->
+      </div>
+      <div class="fleft lborder" ng-if="structure.date.length > 0">
+        <input ng-model="structure.date" ng-readonly="true" id="txtdate" type="text" placeholder="dd-mm-yyyy">
+      </div>
+      <div class="fleft" ng-if="structure.time.length > 0">
+        <img ng-src="../images/icon-time.png" class="img-responsive">
+        <!--  <i class="material-icons material-date-range date-icon">schedule</i> -->
+      </div>
+      <div class="fleft lborder" ng-if="structure.time">
+        <input ui-timepicker="timePickerOptions" ng-readonly="true" ng-model="structure.time" type="text"placeholder="hh:mm am/pm">
+      </div>
+      <div class="fleft" ng-if="structure.timezone.length > 0">
+        <input class="fleft lborder" placeholder="Timezone" ng-readonly="true" ng-model = "structure.timezone" style="padding-top: 5px; background-color:white">
+      </div>
+    </div>
+    <i class="material-icons" style="color:grey;" ng-if="structure.like_count" >thumb_up
+    </i>
+    <span ng-show='structure.like_count > 0'> {{structure.like_count}}
+    </span>
+    <div class="locations" ng-if="structure.venue.length > 0">
+      <div class="fleft location-task" ng-if="structure.venue.length > 0">
+        <img ng-src="../images/icon-location.png" class="img-responsive">
+        <input ng-model = "structure.venue" ng-readonly="true" maxlength="70" type="text"  placeholder="location">
+      </div>
+    </div>
+    <div class="task_description" ng-if="structure.description.length > 0">
+      <div class="row">
+        <div class="col-sm-11" ng-if="structure.description.length > 0">
+          <a href="" >
+            <i class="material-icons material-chat" ng-hide= "structure.done" ng-show = "structure.textarea" required>chat
+            </i>
+          </a>
+          <div ng-if="structure.done" class="structure_description_display" >
+            <div class="fleft click" ng-if="structure.description.length > 0">
+              <i class="material-icons material-chat material-chat-description">chat
+              </i>
+            </div>
+            <div class="task_description_display" ng-readonly="true" ng-if="structure.description.length > 0" >{{structure.description}}
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row task_border_end"></div> -->
+        <!-- <div class="col-sm-1"></div> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="row task_border_end"></div> -->
+</div>
+</div>
+</div>
+<!-- <div class="row task_border_end"></div> -->
+</div>
+<ng-include src="'views/partials/structure_contributor/sugtask.html'">
+</ng-include>
+<ng-include src="'views/partials/structure_contributor/sugtaskuser.html'">
+</ng-include>

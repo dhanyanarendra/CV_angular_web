@@ -1,0 +1,213 @@
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-new-custom" ng-controller="structureCtrl as structure">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#">
+        <img src="../images/perrshape-pro-logo-60.png" ng-click="header.logo();" class="img-responsive">
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-if="headerName">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#dashboard_new" ng-click = "structure.getPage();">Dashboard </a></li>
+        <li><a href="#land">Discover</a></li>
+        <li><a href="#describe">Create Project</a></li>
+        <!-- <li><a href="#">Login</a></li>
+        <li><a href="#">sign up</a></li> -->
+        <li>
+          <div id="new" class="dropdown a-dropdown">
+            <button class="dropdown-toggle" id="account-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <img ng-src="{{profileImage ? profileImage : 'images/image_placeholder_gray.png'}}" class="c-land img-responsive picture">
+              <span ng-if="headerName">{{userName}}</span>
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu dropdown-menu-categories" aria-labelledby="account-dropdown">
+                <li><a href="#followed_projects">Followed Projects</a></li>
+                <li><a href="#my_profile">My Profile</a></li>
+                <li class="divider"></li>
+                <li class="a-logout"><a href="#land" ng-click = "header.logout()">Logout</a></li>
+              </ul>
+            </div>
+          </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div id="c-describe" ng-controller="orgProfileCtrl as orgProfile">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="c-d-flow">
+          <a href="" class="c-d-active">
+            <span>Profile</span>
+          </a>
+          <a href="#contributor_describe" class="btp" ng-show="orgFinal!=orgProfile.user_id">
+            <span>Back to Project</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-8"></div>
+    </div>
+    <div id="op" class="row m-p-top">
+      <div class="col-sm-6">
+        <div class="my-profile">
+          <div class="row">
+            <div class="col-sm-4 col-xs-5">
+              <div class="m-p">
+                <img ng-src="{{profileImage ? profileImage : 'images/image_placeholder_gray.png'}}" class="c-profile img-responsive">
+              </div>
+            </div>
+            <div class="col-sm-8 col-xs-7">
+              <div class="p-name">{{user_name}}</div>
+              <div class="p-place">{{userlocation}}</div>
+              <div class="row p-share">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-4">
+                  <!-- <a href="" ng-if="orgProfile.follow" ng-click="orgProfile.follow_user(false)"><i class="material-icons like_icon" >add_circle_outline</i></a> -->
+                  <!-- <a href="" ng-if="!orgProfile.follow" ng-click="orgProfile.follow_user(true)"><i class="material-icons like_icon_grey" >add_circle_outline</i></a> -->
+                  <!-- <span ng-show ='orgProfile.follow_count_user > 0'>{{orgProfile.follow_count_user}}</span> -->
+                  <!-- <span><h5>Follow</h5></span> -->
+                </div>
+                <div class="col-sm-6"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="organiser-profile">
+          <div>
+            <h5 ng-if="userinterst.length">Interest</h5>
+            <p ng-repeat="userint in userinterst">{{userint}}</p>
+          </div>
+          <div class="o-p-about">
+            <h5 ng-if="aboutuser.length ">About<span>&nbsp; Me</span></h5>
+            <p>{{aboutuser}}
+            </p>
+          </div>
+          <!-- <div class="follow">
+            <div class="comment-circle">{{orgProfile.follow_count_user}}</div><span>Followed</span>
+            <br/>
+            <div class="comment-circle">{{orgProfile.following}}</div><span>Following</span>
+          </div> -->
+          <div class="l-projects">
+            <h5>Current Projects</h5>
+            <span ng-if="!current_projects.length"><h6> No Projects created yet!</h6></span>
+            <div class="p-link" ng-repeat = "p in current_projects track by $index">
+              <i class="fa fa-caret-right"></i><span><a href="" ng-click = "orgProfile.conDescribe(p.id)">{{p.title}}</a></span>
+
+            </div>
+          </div>
+          <div class="l-projects c-project">
+            <div>
+            </div>
+          </div>
+          <div class="impact follow">
+            <h5>Impact</h5>
+            <div class="comment-circle">{{published_count}}</div><span>Campaign Organised</span>
+            <br/>
+            <div class="comment-circle">{{pledgesCount}}</div><span>Contributions Made</span>
+            <br/>
+            <div class="comment-circle">{{suggestionTaskCount}}</div><span>Task Suggestions</span>
+          </div>
+          <div class="l-projects websites">
+            <h5 ng-if="userwebsites.length ">External links</h5>
+            <div class="p-link" ng-repeat = "userweb in userwebsites">
+              <i class="fa fa-caret-right"></i><span><a href="" >{{userweb}}</a></span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+              <!--   <div class="recommend">
+                    <h4>Recommended User</h4>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">&nbsp;This person has contributed to our project
+                        </label>
+                    </div>
+                    <div class="c-d-com">
+                        <i class="material-icons">chat_bubble_outline</i>
+                        <textarea class="form-control" rows="3" placeholder="Type here (max 100 words)" maxlength="100"></textarea>
+                        <button type="button" class="btn btn-secondary pop_up_button">Post</button>
+                    </div>
+                </div>
+                <div class="profile-comments">
+                    <div class="c-d-user">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <div class="comment-circle">
+                                    UC
+                                </div>
+                            </div>
+                            <div class="col-sm-11">
+                                <div class="p-comment">
+                                    <span class="user-comments">UserOneCommented</span>
+                                    <span class="comment-date">Jan 3,16</span>
+                                    <div class="p-u-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c-d-user">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <div class="comment-circle">
+                                    UC
+                                </div>
+                            </div>
+                            <div class="col-sm-11">
+                                <div class="p-comment">
+                                    <span class="user-comments">UserOneCommented</span>
+                                    <span class="comment-date">Jan 3,16</span>
+                                    <div class="p-u-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c-d-user">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <div class="comment-circle">
+                                    UC
+                                </div>
+                            </div>
+                            <div class="col-sm-11">
+                                <div class="p-comment">
+                                    <span class="user-comments">UserOneCommented</span>
+                                    <span class="comment-date">Jan 3,16</span>
+                                    <div class="p-u-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c-d-user">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <div class="comment-circle">
+                                    UC
+                                </div>
+                            </div>
+                            <div class="col-sm-11">
+                                <div class="p-comment">
+                                    <span class="user-comments">UserOneCommented</span>
+                                    <span class="comment-date">Jan 3,16</span>
+                                    <div class="p-u-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+
+            </div>
+          </div>

@@ -1,0 +1,248 @@
+<nav class="navbar navbar-default navbar-fixed-top navbar-new-custom" ng-controller="HeaderCtrl as header" >
+  <div class="container-fluid" ng-controller = "describeCtrl as describe">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#">
+        <img ng-src="../images/perrshape-pro-logo-60.png" ng-click="header.logo();" class="img-responsive">
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-if="headerName">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#dashboard_new" ng-click = "structure.getPage();">Dashboard </a></li>
+        <li><a href="#land">Discover</a></li>
+        <li><a href="#describe">Create Project</a></li>
+        <!-- <li><a href="#">Login</a></li>
+        <li><a href="#">sign up</a></li> -->
+        <li>
+          <div id="new" class="dropdown a-dropdown">
+            <button class="dropdown-toggle" id="account-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <img ng-src="{{profileImage ? profileImage : 'images/image_placeholder_gray.png'}}" class="c-land img-responsive picture">
+              <span ng-if="headerName">{{userName}}</span>
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu dropdown-menu-categories" aria-labelledby="account-dropdown">
+                <li><a href="#followed_projects">Followed Projects</a></li>
+                <li><a href="#my_profile">My Profile</a></li>
+                <li class="divider"></li>
+                <li class="a-logout"><a href="#land" ng-click = "header.logout()">Logout</a></li>
+              </ul>
+            </div>
+          </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div id="describe-content">
+  <div class="container">
+    <br>
+    <br>
+    <div class="progress_bar">
+      <span class="flowCircle">1</span>
+      <a href="#"><span class="flow">Describe</span></a>
+      <span class="flowCircle flowCircle_margin">2</span>
+      <a href="#"><span class="flow">Structure</span></a>
+    </div>
+    <hr>
+    <!--  <p class="profile_name">Describe</p> -->
+    <div class="describe_heading project_name">Clean Up Mysore</div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 structure_layout">
+          <div id="sort_goal">
+            <div class="row">
+              <div class="col-sm-7"></div>
+              <div class="col-sm-5">
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Sort Goal View
+                    <i class="material-icons arrow-down">keyboard_arrow_down</i>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="">Expand Projects</a></li>
+                    <li><a href="">Collapse Projects<i class="material-icons arrow-right">keyboard_arrow_right</i></a></li>
+                    <li><a href="">Calendar Sort</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr style="width: 106%; margin-left:-16px;">
+          <div id="goal">
+            <div class="goal_area">
+              <div class="row">
+                <div class="col-sm-1">
+                  <a href=""><i class="material-icons material-icons-task">filter_center_focus</i></a>
+                </div>
+                <div class="col-sm-10">
+                  <form>
+                    <textarea rows="1" cols="45">Paint Bus near the church</textarea>
+                  </form>
+                </div>
+                <div class="col-sm-1">
+                  <a href=""><i class="material-icons material-delete text-left">delete</i></a>
+                </div>
+              </div>
+            </div>
+            <hr style="margin-right:32px;">
+            <div class="goal_area">
+              <div class="row">
+                <div class="col-sm-1">
+                  <a href=""><i class="material-icons material-icons-task">filter_center_focus</i></a>
+                </div>
+                <div class="col-sm-10">
+                  <form>
+                    <textarea rows="1" cols="45">Repair Bus Stop opposite Mall</textarea>
+                  </form>
+                  <div class="row border_goal">
+                    <div class="col-sm-11 col-xs-offset-1">
+                      <div class="task_padding">
+                        <div class="row">
+                          <div class="col-sm-1">
+                            <a href="">
+                              <i class="material-icons material-icons-task">filter_center_focus</i>
+                            </a>
+                          </div>
+                          <div class="col-sm-1">
+                            <a href=""><img ng-src="../images/circle_check.png" class="img-responsive circle_check_icon"></a>
+                          </div>
+                          <div class="col-sm-5">
+                            <form>
+                              <textarea rows="1" cols="45">Scrape walls before painiting</textarea>
+                            </form>
+                          </div>
+                          <div class="col-sm-5">
+                            <button type="button" class="btn btn-info">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row border_goal">
+                    <div class="col-sm-11 col-xs-offset-1">
+                      <div class="task_padding">
+                        <div class="row">
+                          <div class="col-sm-1">
+                            <a href="">
+                              <i class="material-icons material-icons-task">filter_center_focus</i>
+                            </a>
+                          </div>
+                          <div class="col-sm-1">
+                            <a href=""><img ng-src="../images/circle_check.png" class="img-responsive circle_check_icon"></a>
+                          </div>
+                          <div class="col-sm-6">
+                            <form>
+                              <textarea rows="1" cols="45">Scrape  before painiting</textarea>
+                            </form>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="task_area">
+                              <ul class="list-items">
+                                <li>
+                                  <a href="" class="month">FEB 16</a>
+                                </li>
+                                <li>
+                                  <a href="">
+                                    <img ng-src="../images/object1.png" class="img-responsive task_icon">
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="">
+                                    <img ng-src="../images/object2.png" class="img-responsive task_icon">
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="">
+                                    <img ng-src="../images/trash.png" class="img-responsive task_icon">
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row border_goal">
+                    <div class="col-sm-11 col-xs-offset-1">
+                      <div class="task_padding">
+                        <div class="row">
+                          <div class="col-sm-1">
+                            <a href="">
+                              <i class="material-icons material-icons-task">filter_center_focus</i>
+                            </a>
+                          </div>
+                          <div class="col-sm-1">
+                            <a href=""><img ng-src="../images/circle_check.png" class="img-responsive circle_check_icon"></a>
+                          </div>
+                          <div class="col-sm-5">
+                            <form>
+                              <textarea rows="1" cols="45">Scrape walls before painiting</textarea>
+                            </form>
+                          </div>
+                          <div class="col-sm-5">
+                            <button type="button" class="btn btn-info btn-delete">delete</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="add_task">
+                      <a href="">
+                        <i class="material-icons icon-add-goal">add_circle_outline</i><span>Add Task</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr style="margin-right:32px;">
+            <div class="goal_area">
+              <div class="row">
+                <div class="col-sm-1">
+                  <a href=""><i class="material-icons material-icons-task">filter_center_focus</i></a>
+                </div>
+                <div class="col-sm-10">
+                  <form>
+                    <textarea rows="1" cols="45">Clean Street</textarea>
+                  </form>
+                </div>
+                <div class="col-sm-1">
+                  <a href=""><i class="material-icons material-delete text-left">delete</i></a>
+                </div>
+              </div>
+            </div>
+            <hr style="margin-right:32px;">
+            <div class="goal_area">
+              <div class="row">
+                <div class="col-sm-1">
+                  <a href=""><i class="material-icons material-icons-task">filter_center_focus</i></a>
+                </div>
+                <div class="col-sm-10">
+                  <form>
+                    <textarea rows="1" cols="45">Mall Beach clean shelters</textarea>
+                  </form>
+                </div>
+                <div class="col-sm-1">
+                  <a href=""><i class="material-icons material-delete text-left">delete</i></a>
+                </div>
+              </div>
+            </div>
+            <hr style="margin-right:32px;">
+            <div class="add_goal">
+              <a href="">
+                <i class="material-icons icon-add-goal">add_circle_outline</i><span>Add Goal</span>
+              </a>
+            </div>
+          </div>
+          <div class="col-sm-6"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

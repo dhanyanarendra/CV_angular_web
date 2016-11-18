@@ -1,0 +1,44 @@
+<ng-include src="'views/partials/project_header.html'"></ng-include>
+<div id="structure-contributor">
+  <div class="row">
+    <div class="col-sm-8"></div>
+    <div class="col-sm-4 text-right c-label">
+      <!-- <h3>Logged in as a Contributor</h3> -->
+    </div>
+  </div>
+  <div class="container">
+    <!-- contributor-describe-flow starts-->
+    <div class="row">
+      <div class="col-sm-6 s-c-top">
+        <div class="c-d-flow">
+
+          <a href="/#/contributor_describe" ng-click="contributor.describepage(contributor.project_name,contributor.category)";>
+            <span>Describe</span>
+          </a>
+          <a href="" class="c-d-active">
+            <span>Structure</span>
+          </a>
+          <a href="#needs_contributor" ng-click=contributor.needspage(contributor.project_name,contributor.category);>
+           <span>Needs</span>
+         </a>
+       </div>
+     </div>
+     <div class="col-sm-8"></div>
+   </div>
+
+   <div class="describe_heading project_name ">{{project_name}}
+
+     <span class="category_name">{{category}}</span></div>
+
+
+     <div class="container">
+      <div class="row fullpanel s-c-fullpanel">
+        <div id="leftpanel" ng-class="structure.pageview ? 'leftpanel fullpage' : 'leftpanel halfpage'">
+          <ng-include src="'views/partials/structure_contributor/leftpanel.html'"></ng-include>
+        </div>
+        <div class="rightpanel" ng-class="structure.pageview ? 'rightpanel hide' : 'rightpanel halfpage'">
+          <ng-include src="'views/partials/structure_contributor/rightpanel.html'"></ng-include>
+        </div>
+      </div>
+    </div>
+  </div>

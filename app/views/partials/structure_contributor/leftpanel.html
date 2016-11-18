@@ -1,0 +1,114 @@
+<div id="sort_goal">
+  <div class="row">
+    <div class="col-sm-7"></div>
+    <div class="col-sm-5">
+      <div class="dropdown text-right sort">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+
+          <i class="material-icons arrow-down">keyboard_arrow_down</i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+          <li ng-click="structure.openAllItems()"><a href="">Expand Goals<i ng-show = "structure.showexpandicon" class="material-icons arrow-right">keyboard_arrow_right</i></a></li>
+
+          <li ng-click="structure.closeAllItems()"><a href="">Collapse Goals<i ng-show = "structure.showcolapseicon"class="material-icons arrow-right">keyboard_arrow_right</i></a></li>
+          <li><a href="">Needs</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<uib-accordion close-others="false">
+<ul ui-sortable="structure.goalSortableOptions" ng-model="structure.goals" class="goalpanel">
+  <uib-accordion-group ng-repeat="item in structure.goals" ng-click="structure.getTasks(item, $index);" is-open="item.open" ng-init="parentindex=$index" data-drop="true" goal="{{item}}" jqyoui-droppable="{onDrop: 'structure.dropCallback(item)'}">
+
+  <uib-accordion-heading>
+  <div ng-click = "structure.hideTask();" class="panel-title-row">
+    <div class="goal_row">
+      <!-- <i class="material-icons material-icons-task">filter_center_focus</i> -->
+    </div>
+    <form name = "goalForm" ng-submit="structure.updateGoal(item)">
+      <input href="" class="goal_row goal-title addgoaltxt" ng-readonly="true" ng-model = "item.title" ng-click="structure.resetTitle(item);">
+    </input>
+  </form>
+
+</div>
+</uib-accordion-heading>
+
+
+<ul class="taskrow" ui-sortable="structure.taskSortableOptions" ng-model="structure[item.id].tasks">
+  <div class="row border_goal" ng-class="{'active': structure.selectedtask == $index && structure.selectedgoal == parentindex || structure.selectedtask === taskitem.id}" ng-repeat="taskitem in structure[item.id].tasks track by $index" class="subrow" ng-click="structure.openTasks(item, taskitem, $event, $index, parentindex); ">
+  <!-- {{taskitem}} -->
+    <div class="task_padding">
+      <div class="task_row">
+        <!-- <i class="material-icons material-icons-task">filter_center_focus</i> -->
+      </div>
+      <div class="task_row">
+       <!--  <span >
+          <img ng-style="myStyle" src="../images/circle_check.png" class="img-responsive circle_check_icon" >
+        </span> -->
+      </div>
+      <div>
+
+        <form name = "taskForm" ng-submit= "structure.taskDetails(item, taskitem);" >
+          <input class="click task_row task_row_width addgoaltxt" ng-readonly="true" ng-class="{'active': structure.selectedtask == $index && structure.selectedgoal == parentindex || structure.selectedtask === taskitem.id}" ng-model = "taskitem.title" ng-click="structure.hideNeedform(); structure.showtask(item, taskitem, true); structure.getNeeds(item, taskitem); structure.openConNeeds(item, taskitem, structure.need_item, $event, item.id, taskitem.id);" ng-if="$index == focusIndex" autofocus>
+
+          <input class="click task_row task_row_width addgoaltxt" ng-readonly="true" ng-class="{'active': structure.selectedtask == $index && structure.selectedgoal == parentindex || structure.selectedtask === taskitem.id}" ng-model = "taskitem.title" ng-click="structure.hideNeedform(); structure.showtask(item, taskitem, true); structure.getNeeds(item, taskitem); structure.openConNeeds(item, taskitem, structure.need_item, $event, item.id, taskitem.id);" ng-if="$index != focusIndex">
+        </input>
+      </form>
+    </div>
+    <div class="text-right task-icons">
+      <p class="task_date" ng-bind="taskitem.date | date:'MMM d'"></p>
+
+
+      <img ng-src="../images/icon-task-details.png" class="img-responsive task_icon click" ng-if="taskitem.description || taskitem.date || taskitem.time || taskitem.venue || taskitem.timezone" ng-click="structure.showtask(item, taskitem, false); ">
+
+      <img ng-src="../images/icon-needs.png" class="img-responsive task_icon click" ng-click="structure.showNeeds(); structure.getNeeds(item ,taskitem); structure.showTaskCollapse(); structure.openConNeeds(item ,taskitem, structure.need_item, $event, structure.Details_goal_id, structure.Details_task_id);" ng-if="taskitem.status ||  structure.sug_needs.length">
+
+
+      <span class="list-items" ng-if="structure.selectedtask == $index && structure.selectedgoal == parentindex">
+
+      </span>
+    </div>
+  </div>
+
+</div>
+</ul>
+<div role="tab" class="addtaskrow" ng-if="structure.showAddTask($index) && structure.addtaskrow">
+  <div class="text-left add_goal_row " ng-class="{borderchange: hover}"
+  ng-selected="hover = true">
+
+</div>
+<div class="text-right">
+  <!-- <button class="btn btn-info" ng-model="button" ng-click="structure.addTask(item, $index)" ng-disabled="taskForm.task.$error.required">Save</button> -->
+</div>
+</div>
+<!-- <div id="goal" ng-if="!structure.addtaskrow"> -->
+<!-- <div class="add_goal add_task_border click">
+<a href="">
+<i class="material-icons icon-add-goal" ng-mousedown = "structure.addTaskRow(true, $index); structure.openTasks(item, taskitem, $event, $index, parentindex); " >add_circle_outline</i><span ng-mousedown = "structure.addTaskRow(true, $index); structure.openTasks(item, taskitem, $event, $index, parentindex);" >Add Task</span>
+</a>
+</div> -->
+<!-- </div> -->
+</uib-accordion-group>
+</ul>
+</uib-accordion>
+
+
+<div role="tab" class="addgoalrow" ng-if="structure.addgoalrow">
+  <div class="text-left save_goal_row" ng-class="{goalborderchange: hover}"
+  ng-selected="hover = true">
+
+
+
+</div>
+<div class="text-right">
+  <!-- <span ng-show="goalForm.goal.$error.required">enter the goal</span> -->
+</div>
+
+</div>
+
+<ng-include src="'views/content/task_suggestion.html'"></ng-include>
+
+
+

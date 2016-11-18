@@ -1,0 +1,87 @@
+  <a href="" data-toggle="modal" data-target="#myModal_Signin" ng-click="header.setLoginPath('loginlink')">log in </a>
+
+  <div class="modal fade" id="myModal_Signin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="signinCtrl as signin">
+
+    <div class="modal-dialog modal-dialog-custom-signin" role="document">
+      <div class="modal-content modal-content-custom">
+        <div class="modal-header modal-signin-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="signin.flush()">
+
+            <span aria-hidden="true"><i class="icon-close"></i></span>
+          </button>
+          <img src="/images/perrshape-pro-logo-47.png" class="signin-header-logo">
+        </div>
+        <br />
+        <div style="color:#a94442" ng-if="signin.errorMsgFlag" class="error_msg_login err-msg" >Incorrect email or password</div>
+
+        <div class="modal-body modal-body-signin">
+
+         <form name ="signinForm">
+
+          <div class="row">
+            <!-- <div class="col-sm-2"></div> -->
+            <div class="col-sm-9 col-xs-10 center-column">
+
+              <div class="form-group">
+                <input type="text" class="email_form" placeholder="Email" tabindex="1" ng-model="signin.signinForm.userid" required ng-keyup="signin.keyPresslogin($event)"/>
+
+                <span style="color:#a94442" ng-show="!signin.signinForm.userid.length && signin.submitted " class="control-label err-msg" for="inputError">Please enter your email</span>
+
+                <!-- <span style="color:#a94442" ng-show="signin.signinForm.userid.length < 8 && signin.submitted">Username must have at least 8 characters</span>
+
+                <span style="color:#a94442" ng-show="signin.signinForm.userid.length > 32 && signin.submitted">Username can have maximum 32 characters</span> -->
+              </div>
+
+              <div class="form-group">
+
+                <a href="#" ng-click="signin.togglePwd()" class="show_signup">Show</a>
+                <input ng-hide="signin.showpassword" tabindex="2" type="password" class="password_form loginspace" placeholder="Password" ng-model="signin.signinForm.password" required ng-keyup="signin.keyPresslogin($event)"  />
+
+                <input ng-show="signin.showpassword"  type="text" class="password_form loginspace" placeholder="Password" ng-model="signin.signinForm.password" required ng-keyup="signin.keyPresslogin($event)" />
+
+                <span style="color:#a94442" ng-show="!signin.signinForm.password.length && signin.submitted" class="error_message_signin err-msg">Please enter your password</span>
+
+                <span style="color:#a94442" ng-show="signin.signinForm.password.length < 8 && signin.submitted" class="err-msg">Password must have at least 8 characters</span>
+
+
+              </div>
+
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+          <!-- <p class="show_one"><a href="#">show</a></p> -->
+          <br />
+          <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 button-center">
+              <button type="button"  id="sign-btn" tabindex="3" class="btn btn-info btn-info-custom"  ng-click="signin.login(); signin.submitted = true">LOGIN</button>
+              <!-- <div style="color:#a94442" ng-if="signin.errorMsgFlag" >Incorrect username or password</div> -->
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+          <br />
+
+          <p class="signin-notes">
+
+            <a href="" ng-click = "signin.emailpage()" class="signin-notes-links">Trouble Logging in ?</a>
+          </a>
+
+        </p>
+
+      </form>
+    </div>
+
+    <div class="modal-footer modal-signin-footer">
+      <p>New to PeerShape? <a href="" data-toggle="modal" data-target="#myModal_Signup" ng-click="header.signup()">Sign Up </a></p>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<script type="text/javascript">
+  $('#MyButton').click(function() {
+ $('.nav-tabs a:first').tab('show');
+});
+</script>

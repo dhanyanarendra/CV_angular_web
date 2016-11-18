@@ -1,0 +1,116 @@
+<!doctype html>
+<html ng-app="cityVitalityAngularApp" ng-controller="MainCtrl">
+<head>
+  <meta charset="utf-8">
+  <title>PeerShape</title>
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/angularjs-datepicker/dist/angular-datepicker.min.css" />
+  <link rel="stylesheet" href="bower_components/jquery-timepicker-jt/jquery.timepicker.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <!-- <link href="styles/style.css" rel="stylesheet"> -->
+  <link href="styles/main.css" rel="stylesheet">
+  <link href="styles/media.css" rel="stylesheet">
+  <!-- endbuild -->
+  <!-- Chosen Plugin -->
+  <!-- End of Chosen Plugin -->
+  <link rel="icon" href="images/favicon.png" type="image/png">
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Alike' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.2.3/css/simple-line-icons.css">
+
+  <base href="/" />
+</head>
+<body>
+
+ <div ui-view="header"></div>
+ <div ui-view="content"></div>
+ <div ui-view="footer"></div>
+
+ <!-- script references -->
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
+  <!--<script src="js/bootstrap.min.js"></script>
+  <script src="js/scripts.js"></script> -->
+
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+  <script src="bower_components/underscore/underscore.js"></script>
+  <script src="bower_components/angular-underscore-module/angular-underscore-module.js"></script>
+  <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+  <script src="bower_components/angular-ui-sortable/sortable.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/angularjs-datepicker/dist/angular-datepicker.min.js"></script>
+  <script src="bower_components/jquery-timepicker-jt/jquery.timepicker.js"></script>
+  <script src="bower_components/angular-jquery-timepicker/src/timepickerdirective.js"></script>
+  <script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
+  <script src="bower_components/angular-dragdrop/src/angular-dragdrop.js"></script>
+  <script src="bower_components/angular-ui-mask/dist/mask.js"></script>
+  <script src="bower_components/angular-read-more/dist/readmore.min.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:js({.tmp,app,dist}) scripts/scripts.js -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/config.js"></script>
+  <script src="scripts/model.js"></script>
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/about.js"></script>
+  <script src="scripts/controllers/describe.js"></script>
+  <script src="scripts/services/describe.js"></script>
+  <script src="scripts/controllers/structure.js"></script>
+  <script src="scripts/services/structure.js"></script>
+  <script src="scripts/controllers/land.js"></script>
+  <script src="scripts/services/land.js"></script>
+  <script src="scripts/services/task.js"></script>
+  <script src="scripts/controllers/header.js"></script>
+  <script src="scripts/services/needs.js"></script>
+
+   <!-- <script src="scripts/controllers/registration.js"></script>
+   // <script src="scripts/services/registration.js"></script> -->
+   <script src="scripts/controllers/signup.js"></script>
+   <script src="scripts/controllers/signin.js"></script>
+   <script src="scripts/services/signup.js"></script>
+   <script src="scripts/services/signin.js"></script>
+   <script src="scripts/directives/focus.js"></script>
+   <script src="scripts/directives/fileselect.js"></script>
+   <script src="scripts/controllers/preview.js"></script>
+   <script src="scripts/controllers/contributor.js"></script>
+   <script src="scripts/services/signin.js"></script>
+   <script src="scripts/services/paginationservice.js"></script>
+   <script src="scripts/controllers/dashboard.js"></script>
+   <script src="scripts/services/dashboard.js"></script>
+   <script src="scripts/controllers/myProfile.js"></script>
+   <script src="scripts/services/myProfile.js"></script>
+   <script src="scripts/controllers/orgProfile.js"></script>
+   <script src="scripts/services/myPledge.js"></script>
+   <script src="scripts/controllers/myPledge.js"></script>
+   <script src="scripts/controllers/followed_projects.js"></script>
+   <script src="scripts/services/followed_projects.js"></script>
+   <script src="scripts/controllers/termsandconditions.js"></script>
+   <script src="scripts/controllers/privacypolicy.js"></script>
+   <script src="scripts/controllers/aboutus.js"></script>
+   <script src="scripts/controllers/contact.js"></script>
+
+
+   <!-- endbuild -->
+
+ </body>
+ </html>

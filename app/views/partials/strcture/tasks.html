@@ -1,0 +1,92 @@
+<form id="input_id" class="textchange1">
+  <div id="task_details_sec">
+    <div class="task_detail">
+      <div class="row task_border">
+        <div class="col-sm-10 col-xs-9">
+          <a href="">
+            <p>Task Details</p>
+          </a>
+        </div>
+        <div class="col-sm-2 col-xs-3">
+          <!-- <a href="">
+            <i class="material-icons material-arrow-up">keyboard_arrow_up</i>
+            <i class="material-icons material-arrow-down">keyboard_arrow_down</i>
+          </a> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="datetimezone">
+      <div class="row">
+      <div class="col-sm-5 col-xs-6 lborder">
+          <div class="fleft">
+            <img src="../images/icon-date.png" class="img-responsive">
+            <!-- <i class="material-icons material-date-range date-icon">date_range</i> -->
+          </div>
+
+          <div class="fleft">
+            <datepicker date-format="dd-MM-yyyy" >
+              <input ng-model="structure.date" id="txtdate" type="text" placeholder="dd-mm-yyyy">
+            </datepicker>
+          </div>
+        </div>
+
+        <div class="col-sm-5 col-xs-6 lborder">
+          <div class="fleft">
+            <img src="../images/icon-time.png" class="img-responsive">
+            <!-- <i class="material-icons material-date-range date-icon">schedule</i> -->
+          </div>
+
+          <div class="fleft">
+            <input  ui-timepicker="timePickerOptions" ng-model="structure.time" type="text"placeholder="hh:mm am/pm">
+          </div>
+        </div>
+        <div class="col-sm-2 col-xs-6">
+          <div class="fleft">
+            <input  ng-model="structure.timezone" type="text"placeholder="Duration">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="locations structure-task-margin">
+      <!-- <div class="fleft">
+        <i class="material-icons material-locations">room</i>
+      </div> -->
+      <div class="fleft">
+        <img src="../images/icon-location.png" class="img-responsive" style="display:inline">
+        <input ng-model = "structure.venue" maxlength="70" type="text" placeholder="location">
+      </div>
+    </div>
+
+    <div class="task_description structure-task-margin">
+      <div class="row">
+        <div class="col-sm-11">
+          <a href="" >
+            <img src="../images/icon-description.png" class="img-responsive" ng-hide= "structure.done" ng-show = "structure.textarea" required>
+            <!-- <i class="material-icons material-chat" ng-hide= "structure.done" ng-show = "structure.textarea" required>chat</i> -->
+          </a>
+          <div ng-if="structure.done" class="structure_description_display" ng-click = "structure.test();">
+            <div class="fleft click">
+              <img src="../images/icon-description.png" class="img-responsive" ng-if="structure.description.length > 0">
+              <!-- <i class="material-icons material-chat material-chat-description" ng-if="structure.description.length > 0">chat</i> -->
+            </div>
+            <div class="task_description_display" ng-if="structure.description.length > 0" >{{structure.description}}</div>
+          </div>
+          <form name="text_description texttask">
+            <textarea ng-model = "structure.description" class= "form-control" placeholder="Task description (max 100 words)" ng-if="!structure.done" rows="4" cols="100" maxlength="175"  required>
+            </textarea>
+            <!-- Below is the post button -->
+              <button type="button" class="btn btn-secondary pop_up_button"  ng-click = "structure.taskDetails(structure.Details_goal, structure.Details_task,focusIndex); structure.getTasks(structure.Details_goal);">Save</button>
+            <!--end of post button  -->
+          </form>
+        </div>
+        <div class="col-sm-1"></div>
+      </div>
+    </div>
+    <div class="row task_border_end"></div>
+  </div>
+</form>
+</div>
+</div>
+<div class="row task_border_end"></div>
+</div>

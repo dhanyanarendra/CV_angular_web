@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>PeerShape</title>
+  <link rel="icon" href="/favicon.ico" type="images/" />
+  <link href="../styles/main.css" rel="stylesheet" />
+  <link href="styles/media.css" rel="stylesheet" />
+  <!-- Bootstrap CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+   <script src="http://code.angularjs.org/1.2.6/angular.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.2.3/css/simple-line-icons.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+</head>
+<body>
+  <!-- Header Begins -->
+  <div class="container">
+    <div id="navigation-bar">
+      <div class="row">
+        <div class="col-md-6">
+          <img src="../images/perrshape-pro-logo-60.png" class="img-responsive">
+        </div>
+        <div class="col-md-6 nav_tab_click">
+          <ul class="start text-right">
+            <li><a href="#">help</a>
+            </li>
+            <li><a href="#" data-toggle="modal" data-target="#myModal_Signin">log in</a>
+            </li>
+            <li><a href="#">sign up</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal_Signin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-dialog-custom-signin" role="document">
+      <div class="modal-content modal-content-custom">
+        <div class="modal-header modal-signin-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="icon-close"></i></span></button>
+          <img src="../images/signup-logo.png" class="signin-header-logo">
+        </div>
+        <br />
+        <div class="modal-body modal-body-signin">
+          <div class="row">
+            <!-- <div class="col-sm-2"></div> -->
+            <div class="col-sm-9 col-xs-10 center-column">
+              <form>
+                <input type="text" class="signin_form" placeholder="Username" />
+              </form>
+              <br /><br />
+              <form>
+                <input type="text" class="password_form" placeholder="Password" />
+              </form>
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+          <a href="#" class="show_one">SHOW</a>
+          <br />
+          <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 button-center">
+              <button type="button" class="btn btn-info btn-info-custom">LOGIN</button>
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+          <br />
+          <p class="signin-notes">
+            Trouble&nbsp<a href="#" class="signin-notes-links">Login?</a>
+          </p>
+        </div>
+        <div class="modal-footer modal-signin-footer">
+          <p>Don't have an account?<a href="#" class="login-link">&nbspSign Up</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Ends -->
+  <!-- Header Ends -->
+  <!-- Carousel Begins -->
+  <div id="myCarousel" class="carousel slide navigation_border" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="../images/bg_img-1.png" alt="image1">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="carousel-caption carousel-caption-custom">
+              <h1>Shape Your Community</h1>
+              <br />
+              <p>Lorem Ipsum find quickly your events near by!</p>
+            </div>
+            <div class="carousel-caption carousel-caption-button">
+              <a class="btn btn-lg btn-project" href="#">CREATE PROJECT</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <img src="../images/bg_img-2.png" alt="image2">
+      </div>
+    </div>
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span><img src="../images/slider-left-arrow.png" class="img-responsive left_arrow"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span><img src="../images/slider-right-arrow.png" class="img-responsive right_arrow"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  <br />
+  <!-- Carousel Ends -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="select-style">
+          <select>
+            <option value="Education">Education</option>
+            <option value="Environment">Environment</option>
+            <option value="Faith">Faith</option>
+            <option value="Politics">Politics</option>
+            <option value="Food and Shelter">Food and Shelter</option>
+            <option value="Health and Medicine">Health and Medicine</option>
+            <option value="Politics">Politics</option>
+            <option value="Technology">Technology</option>
+            <option value="Community">Community</option>
+            <option value="Bussiness">Business</option>
+            <option value="Animals">Animals</option>
+            <option value="Art, Design and culture">Art, Design and culture</option>
+            <option value="Disaster Relief">Disaster Relief</option>
+            <option value="Social Justice">Social Justice</option>
+            <option value="Sports">Sports</option>
+            <option value="others">others</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="display pull-right">
+          <div>
+            <a class="btn btn-lg btn-project" href="#">DISCOVER</a>
+          </div>
+        </div>
+        <div class="display pull-right">
+          <div class="select-date">
+            <select>
+              <option value="Date">All Dates</option>
+            </select>
+          </div>
+        </div>
+        <div class="display pull-right">
+          <input type="text" class="form-control form-custom search search_width" id="inputSearch" placeholder="Search Projects" required>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+    </div>
+  </div>
+  <!-- Dashboard Begins -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 project-heading">
+        <p>All Projects</p>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="dashboard-box">
+          <div class="row top-8 dashbord-box-pad">
+            <div class="col-sm-6 box-heading">
+              <p>Cleanup Beach</p>
+            </div>
+            <div class="col-sm-6 box-heading-right text-right">
+              <p><span class="head-text">Environment</span><i class="material-icons">panorama</i></p>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 box-image">
+              <img src="../images/box-1.png" class="img-responsive">
+            </div>
+          </div>
+          <div class="row dashbord-box-pad top-8">
+            <div class="col-sm-12">
+              <img class="profile-picture" src="../images/dp.png">
+              <p class="box-text">We are looking for volunters to help canvas the central area. Real change begins at the neighborhod.  Come help us make a diference.</p>
+            </div>
+          </div>
+          <div class="row dashbord-box-pad top-8 footer-icons">
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">thumb_up</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">comment</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">share</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">add_circle_outline</i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="dashboard-box">
+          <div class="row top-8 dashbord-box-pad">
+            <div class="col-sm-7 box-heading">
+              <p>Neighbhorhood Pathway</p>
+            </div>
+            <div class="col-sm-5 box-heading-right text-right">
+              <p><span class="head-text">Community</span><i class="material-icons">next_week</i></p>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 box-image">
+              <img src="../images/box-2.png" class="img-responsive">
+            </div>
+          </div>
+          <div class="row dashbord-box-pad top-8">
+            <div class="col-sm-12">
+              <img class="profile-picture" src="../images/dp-2.png">
+              <p class="box-text">We are looking for voluntters to help canvas the central area. Real change begins at the neighborhod.  Come help us make a diference.</p>
+            </div>
+          </div>
+          <div class="row dashbord-box-pad top-8 footer-icons">
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">thumb_up</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">comment</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">share</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">add_circle_outline</i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="dashboard-box">
+          <div class="row top-8 dashbord-box-pad">
+            <div class="col-sm-6 box-heading">
+              <p>Community Garden</p>
+            </div>
+            <div class="col-sm-6 box-heading-right text-right">
+              <p><span class="head-text">Environment</span><i class="material-icons">panorama</i></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 box-image">
+              <img src="../images/box-3.png" class="img-responsive">
+            </div>
+          </div>
+          <div class="row dashbord-box-pad top-8">
+            <div class="col-sm-12">
+              <img class="profile-picture" src="../images/dp-3.png">
+              <p class="box-text">We are looking for voluntters to help canvas the central area. Real change begins at the neighborhod.  Come help us make a diference.</p>
+            </div>
+          </div>
+          <div class="row dashbord-box-pad top-8 footer-icons">
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">thumb_up</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">comment</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">share</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">add_circle_outline</i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="dashboard-box">
+          <div class="row top-8 dashbord-box-pad">
+            <div class="col-sm-6 box-heading">
+              <p>Park Construction</p>
+            </div>
+            <div class="col-sm-6 box-heading-right text-right">
+              <p><span class="head-text">Land</span><i class="material-icons">panorama</i></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 box-image">
+              <img src="../images/box-4.png" class="img-responsive">
+            </div>
+          </div>
+          <div class="row dashbord-box-pad top-8">
+            <div class="col-sm-12">
+              <img class="profile-picture" src="../images/dp-4.png">
+              <p class="box-text">We are looking for voluntters to help canvas the central area. Real change begins at the neighborhod.  Come help us make a diference.</p>
+            </div>
+          </div>
+          <div class="row dashbord-box-pad top-8 footer-icons">
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">thumb_up</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">comment</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">share</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">add_circle_outline</i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="dashboard-box">
+          <div class="row top-8 dashbord-box-pad">
+            <div class="col-sm-8 box-heading">
+              <p>Meal for School Children</p>
+            </div>
+            <div class="col-sm-4 box-heading-right text-right">
+              <p><span class="head-text">Food</span><i class="material-icons">local_dining</i></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 box-image">
+              <img src="../images/box-5.png" class="img-responsive">
+            </div>
+          </div>
+          <div class="row dashbord-box-pad top-8">
+            <div class="col-sm-12">
+              <img class="profile-picture" src="../images/dp-5.png">
+              <p class="box-text">We are looking for voluntters to help canvas the central area. Real change begins at the neighborhod.  Come help us make a diference.</p>
+            </div>
+          </div>
+          <div class="row dashbord-box-pad top-8 footer-icons">
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">thumb_up</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">comment</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">share</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">add_circle_outline</i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="dashboard-box">
+          <div class="row top-8 dashbord-box-pad">
+            <div class="col-sm-5 box-heading">
+              <p>Academic Help</p>
+            </div>
+            <div class="col-sm-7 box-heading-right text-right">
+              <p><span class="head-text">Health and Medicine</span><i class="material-icons">child_care</i></p>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 box-image">
+              <img src="../images/box-6.png" class="img-responsive">
+            </div>
+          </div>
+          <div class="row dashbord-box-pad top-8">
+            <div class="col-sm-12">
+              <img class="profile-picture" src="../images/dp-3.png">
+              <p class="box-text">We are looking for voluntters to help canvas the central area. Real change begins at the neighborhod.  Come help us make a diference.</p>
+            </div>
+          </div>
+          <div class="row dashbord-box-pad top-8 footer-icons">
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">thumb_up</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">comment</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">share</i></a>
+            </div>
+            <div class="col-sm-3">
+              <a href=""><i class="material-icons">add_circle_outline</i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Dashboard Ends -->
+</body>
+<br />
+<br />
+<br />
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+       <ul class="footer_nav">
+        <li>
+          <a href="#">discover</a>&nbsp &nbsp|&nbsp
+        </li>
+        <li>
+          <a href="#">about us</a>&nbsp &nbsp|&nbsp
+        </li>
+        <li>
+          <a href="#">team</a>&nbsp &nbsp|&nbsp
+        </li>
+        <li>
+          <a href="#">blog</a>&nbsp &nbsp|&nbsp
+        </li>
+        <li>
+          <a href="#">terms</a>&nbsp &nbsp|&nbsp
+        </li>
+        <li>
+          <a href="#">privacy policy</a>&nbsp &nbsp|&nbsp
+        </li>
+        <li>
+          <a href="#">contact us</a>
+        </li>
+      </ul>
+      </div>
+    </div>
+  </div>
+<div class="container">
+  <div class="row padding_footer">
+    <div class="col-md-2">
+      <img src="../images/logo_footer.png" class="img-responsive peerShape">
+    </div>
+    <div class="col-md-5 copywrite">
+      <div class="pull-left">
+        &copy;2016.&nbsp&nbspPeerShape.com.&nbsp All rights reserved.
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-4 copywrite">
+      <div class="pull-right"> TERMS &nbsp &nbsp|&nbsp PRIVACY POLICY</div>
+    </div>
+  </div>
+</div>
+</footer>
+</html>

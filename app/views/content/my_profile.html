@@ -1,0 +1,425 @@
+<nav class="navbar navbar-default navbar-fixed-top navbar-new-custom" ng-controller="HeaderCtrl as header">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#">
+        <img ng-src="../images/perrshape-pro-logo-60.png" ng-click="header.logo();" class="img-responsive">
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-if="headerName">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#dashboard_new" ng-click = "structure.getPage();">Dashboard </a></li>
+        <li><a href="#land">Discover</a></li>
+        <li><a href="#describe">Create Project</a></li>
+        <!-- <li><a href="#">Login</a></li>
+        <li><a href="#">sign up</a></li> -->
+        <li>
+          <div id="new" class="dropdown a-dropdown">
+            <button class="dropdown-toggle" id="account-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <img ng-src="{{profileImage ? profileImage : 'images/image_placeholder_gray.png'}}" class="c-land img-responsive picture">
+              <span ng-if="headerName">{{userName}}</span>
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu dropdown-menu-categories" aria-labelledby="account-dropdown">
+                <li><a href="#followed_projects">Followed Projects</a></li>
+                <li><a href="#my_profile">My Profile</a></li>
+                <li class="divider"></li>
+                <li class="a-logout"><a href="#land" ng-click = "header.logout()">Logout</a></li>
+              </ul>
+            </div>
+          </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+      <div class="container">
+        <form>
+          <div id="user-profile">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="c-d-flow">
+                  <a href="" class="c-d-active"><span>My Profile</span></a>
+                </div>
+              </div>
+
+              <div class="col-sm-8"></div>
+            </div>
+            <div class="flashMsg" ng-show ="my_profile.flashmsg">
+              Profile updated successfully !
+            </div>
+
+            <div class="row u-p-margin">
+              <div class="col-sm-6">
+                <div>
+                  <div class="my-profile">
+                    <div class="row">
+                      <div class="col-sm-4 col-xs-4">
+                        <div class="m-p">
+                      <!-- <img class="c-profile img-responsive" src=
+                      "../images/bg_img-1.png" /> -->
+                      <img ng-src="{{imagep || 'images/image_placeholder_gray.png'}}" class="c-profile img-responsive">
+                    </div>
+                  </div>
+
+                  <div class="col-sm-1 col-xs-2">
+                    <a href=""><img ng-src="../images/icon-circle-close.png" class=
+                      "p-close-icon" ng-click="my_profile.removeImage()"/></a>
+                      <button type="button" class=
+                      "btn btn-default" ng-click="my_profile.triggerUpload();">Change</button>
+                      <input type="file" ng-file-select id="imageField"/>
+                    </div>
+
+
+                    <div class="col-sm-7 col-xs-6">
+                      <div class="p-name">
+                        {{user_name}}
+                      </div>
+
+                      <div class="p-place">
+                        {{my_profile.profileData.location}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <span class="img_er_msg" ng-show="my_profile.imageFormat1" for="inputError">Choose a valid image format</span>
+                </div>
+                <div class="user-profile-input">
+                  <div class="form-group">
+                    <label class="control-label col-sm-3" for="fname">First Name:</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1"
+                      ng-model="my_profile.profileData.first_name" ng-change ="my_profile.edit()" />
+                    </div>
+                    <div class="col-sm-1"></div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-sm-3" for="lname">Last Name:</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id="lname" ng-model="my_profile.profileData.last_name" ng-change ="my_profile.edit()" />
+                    </div>
+                    <div class="col-sm-1"></div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-sm-3" for="Uname">UserName*</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id="uname" ng-change="my_profile.clearUsernameFlag(); my_profile.edit()" ng-model="my_profile.profileData.user_name" required/>
+                      <div style="color:#a94442" ng-if="my_profile.usernameErrorFlag" >
+                      Username already taken
+                    </div>
+                    <span style="color:#a94442" ng-show="my_profile.profileData.user_name.length < 8 && my_profile.profileSubmitted">Username must have at least 8 characters</span>
+                    <span style="color:#a94442" ng-show="my_profile.profileData.user_name.length > 32 && my_profile.profileSubmitted" class=
+                      "myProfile-flag">Username can have maximum 32 characters</span>
+                    </div>
+                    <div class="col-sm-1"></div>
+                  </div>
+                  <!-- <div class="row uprofile-pad">
+                    <div class="col-sm-4 col-xs-5 label-margin text-left">
+                      <span>First Name</span>
+                    </div>
+                    <div class="col-sm-7 col-xs-6">
+                      <input type="text" class="form-control" id="exampleInputEmail1"
+                      ng-model="my_profile.profileData.first_name" ng-change ="my_profile.edit()" />
+                    </div>
+                    <div class="col-sm-1 col-xs-1"></div>
+                  </div> -->
+                  <!-- <div class="row uprofile-pad">
+                    <div class="col-sm-4 col-xs-5 label-margin text-left">
+                      <span>Last Name</span>
+                    </div>
+                    <div class="col-sm-7  col-xs-6">
+                      <input type="text" class="form-control" id="lname" ng-model=
+                      "my_profile.profileData.last_name" ng-change ="my_profile.edit()" />
+                    </div>
+                    <div class="col-sm-1  col-xs-1"></div>
+                  </div> -->
+                  <!-- <div class="row uprofile-pad">
+                    <div class="col-sm-4 col-xs-5 label-margin text-left">
+                      <span>UserName*</span>
+                    </div>
+                    <div class="col-sm-7 col-xs-6">
+                      <input type="text" class="form-control" id="uname" ng-change=
+                      "my_profile.clearUsernameFlag(); my_profile.edit()" ng-model=
+                      "my_profile.profileData.user_name" required/>
+                    </div>
+                    <div class="col-sm-1 col-xs-1"></div>
+                  </div>
+                  <div style="color:#a94442" ng-if="my_profile.usernameErrorFlag" class=
+                  "myProfile-flag">
+                  Username already taken
+                </div>
+                <span style="color:#a94442" ng-show="my_profile.profileData.user_name.length < 8 && my_profile.profileSubmitted" class=
+                "myProfile-flag">Username must have at least 8 characters</span>
+                <span style="color:#a94442" ng-show="my_profile.profileData.user_name.length > 32 && my_profile.profileSubmitted" class=
+                  "myProfile-flag">Username can have maximum 32 characters</span> -->
+                  <div class="form-group">
+                    <label class="control-label col-sm-3" for="email">Email*:</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id="email" ng-model="my_profile.profileData.email" ng-change="my_profile.clearEmailFlag(); my_profile.edit()"  required/>
+                      <div style="color:#a94442" ng-if="my_profile.emailErrorFlag" class=
+                      "myProfile-flag">
+                      E-mail already taken
+                    </div>
+                    <span style="color:#a94442" ng-if="my_profile.emailInvalidFlag" >
+                     Not a valid E-mail address
+                   </span>
+                 </div>
+                 <div class="col-sm-1"></div>
+               </div>
+                  <!-- <div class="row uprofile-pad">
+                    <div class="col-sm-4 col-xs-5 label-margin text-left">
+                      <span>Email*</span>
+                    </div>
+                    <div class="col-sm-7 col-xs-6">
+                      <input type="text" class="form-control" id="email" ng-model=
+                      "my_profile.profileData.email" ng-change=
+                      "my_profile.clearEmailFlag(); my_profile.edit()"  required/>
+                    </div>
+                    <div class="col-sm-1 col-xs-1"></div>
+                  </div>
+                  <div style="color:#a94442" ng-if="my_profile.emailErrorFlag" class=
+                  "myProfile-flag">
+                  E-mail already taken
+                </div>
+                <span style="color:#a94442" ng-if="my_profile.emailInvalidFlag" >
+                 Not a valid E-mail address
+               </span> -->
+               <div class="form-group">
+                <label class="control-label col-sm-3" for="phone">Phone*:</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="phoneno" ng-model="my_profile.profileData.phone_number" ui-mask="999-999-9999" ui-mask-placeholder ui-mask-placeholder-char= "space" ng-change ="my_profile.edit()"/>
+                </div>
+                <div class="col-sm-1"></div>
+              </div>
+              <!-- <div class="row uprofile-pad">
+                <div class="col-sm-4 col-xs-5 label-margin text-left">
+                  <span>Phone</span>
+                </div>
+                <div class="col-sm-7 col-xs-6">
+                  <input type="text" class="form-control" id="phoneno" ng-model=
+                  "my_profile.profileData.phone_number" ui-mask="999-999-9999" ui-mask-placeholder ui-mask-placeholder-char= "space" ng-change ="my_profile.edit()"/>
+                </div>
+                <div class="col-sm-1 col-xs-1"></div>
+              </div> -->
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="company">Company:</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="company" ng-model="my_profile.profileData.company" ng-change ="my_profile.edit()" />
+                </div>
+                <div class="col-sm-1"></div>
+              </div>
+              <!-- <div class="row uprofile-pad">
+                <div class="col-sm-4 col-xs-5 label-margin text-left">
+                  <span>Company</span>
+                </div>
+                <div class="col-sm-7 col-xs-6">
+                  <input type="text" class="form-control" id="company" ng-model=
+                  "my_profile.profileData.company" ng-change ="my_profile.edit()" />
+                </div>
+                <div class="col-sm-1 col-xs-1"></div>
+              </div> -->
+              <div class="form-group">
+                <label class="control-label col-sm-3" for="location">Location:</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="location" ng-model="my_profile.profileData.location" ng-change ="my_profile.edit()"/>
+                </div>
+                <div class="col-sm-1"></div>
+              </div>
+              <!-- <div class="row uprofile-pad">
+                <div class="col-sm-4 col-xs-5 label-margin text-left">
+                  <span>Location</span>
+                </div>
+                <div class="col-sm-7 col-xs-6">
+                  <input type="text" class="form-control" id="location" ng-model=
+                  "my_profile.profileData.location" ng-change ="my_profile.edit()"/>
+                </div>
+                <div class="col-sm-1 col-xs-1"></div>
+              </div> -->
+              <div class="form-group">
+                <label class="control-label col-sm-3 col-xs-6" for="timezone">Time Zone:</label>
+                <div class="col-sm-8 col-xs-6">
+                  <select class="fleft lborder tzone-align" ng-model=
+                  "my_profile.profileData.timezone" ng-change ="my_profile.edit()">
+                  <option value="">
+                    Timezones
+                  </option>
+                  <option value="est">
+                    EST
+                  </option>
+                  <option value="utc">
+                    UTC
+                  </option>
+                  <option value="mst">
+                    MST
+                  </option>
+                  <option value="ast">
+                    AST
+                  </option>
+                  <option value="cst">
+                    CST
+                  </option>
+
+                  <option value="pst">
+                    PST
+                  </option>
+                </select>
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+              <!-- <div class="row uprofile-pad">
+                <div class="col-sm-4 col-xs-5 label-margin text-left">
+                  <span>Time Zone</span>
+                </div>
+                <div class="col-sm-7 col-xs-6">
+                  <select class="fleft lborder tzone-align" ng-model=
+                  "my_profile.profileData.timezone" ng-change ="my_profile.edit()">
+                  <option value="">
+                    Timezones
+                  </option>
+                  <option value="est">
+                    EST
+                  </option>
+                  <option value="utc">
+                    UTC
+                  </option>
+                  <option value="mst">
+                    MST
+                  </option>
+                  <option value="ast">
+                    AST
+                  </option>
+                  <option value="cst">
+                    CST
+                  </option>
+
+                  <option value="pst">
+                    PST
+                  </option>
+                </select>
+              </div>
+              <div class="col-sm-1 col-xs-1"></div>
+            </div> -->
+            <div class="form-group">
+              <label class="control-label col-sm-3 col-xs-12" for="websites">Websites:</label>
+              <div class="col-sm-7 col-xs-10">
+                <input type="text" class="form-control" id="url" ng-model=
+                "my_profile.websites" ng-change ="my_profile.edit()" />
+              </div>
+              <div class="col-sm-2 col-xs-2">
+                <a href="" ng-disabled="!isEnabled" ng-click=
+                "my_profile.addWebsite(my_profile.websites); checkQuestions();" ><img ng-src="../images/icon-add.png"/></a>
+              </div>
+            </div>
+            <!-- <div class="row uprofile-pad">
+              <div class="col-sm-4 col-xs-5 label-margin text-left">
+                <span>Websites</span>
+              </div>
+
+              <div class="col-sm-7 col-xs-5">
+                <input type="text" class="form-control" id="url" ng-model=
+                "my_profile.websites" ng-change ="my_profile.edit()" />
+              </div>
+
+              <div class="col-sm-1 col-xs-1">
+                <a href="" ng-disabled="!isEnabled" ng-click=
+                "my_profile.addWebsite(my_profile.websites); checkQuestions();" ><img class="url-add-icon" src="../images/icon-add.png"/></a>
+              </div>
+            </div> -->
+            <div class="row p-url">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-8">
+                <div class="in-one" ng-repeat=
+                "website in my_profile.profileData.websites track by $index">
+                <div class="row">
+                  <div class="col-sm-10">
+                    <span>{{website}}</span>
+                  </div>
+                  <div class="col-sm-2">
+                    <a href="" ng-click="my_profile.removeWebsite(website)"><img ng-src=
+                      "../images/icon-close.png" class="url-add-icon" /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="about-info">
+          <p>ABOUT ME</p>
+          <textarea ng-model="my_profile.profileData.about_me" class="form-control"
+          placeholder="maximum 500 words" ng-if="!my_profile.done" rows="18" cols=
+          "100" maxlength="875" ng-change ="my_profile.edit()"></textarea>
+        </div>
+        <div class="my-interest">
+          <p>my interest</p>
+          <div class = "ad-interest-one">
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-11">
+                <div class="note" ng-if="!my_profile.interestsArray.length">What kind of projects are you interested in?</div>
+                <div class="interests-list ad-il">
+                  <div>
+                    <div class="in-one" ng-repeat ="intArray in  my_profile.interestsArray">
+                      <div class="row">
+                        <div class="col-sm-10 col-xs-10">
+                          {{intArray}}
+                        </div>
+                        <div class="col-sm-2 col-xs-2 text-right">
+                          <a href="">
+                            <img ng-src="../images/icon-close.png" class="url-add-icon" ng-click = "my_profile.removeInterest(intArray)">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="interests-list">
+                  <!-- <div class="col-sm-1"></div> -->
+                  <div>
+                    <div class="in-one" ng-repeat="interest in interests track by $index">
+                      <div class="row">
+                        <div class="col-sm-10 col-xs-10">
+                          {{interest}}
+                        </div>
+                        <div class="col-sm-2 col-xs-2 text-right">
+                          <a href="">
+                            <img ng-src="../images/icon-add.png" class="url-add-icon" ng-click="my_profile.addInterest(interest)">
+                          </a>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="col-sm-1"></div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row profile-button">
+      <div class="col-sm-4 col-sm-offset-8 text-right">
+        <a href="" ng-click = "my_profile.redirect(user_id)">view profile</a>
+        <button type="submit" class="btn btn-info btn-attach" ng-click="my_profile.save();">update</button>
+      </div>
+      <!--  <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div> -->
+
+      <div class="alert" id="View_WithoutSaving" ng-if="my_profile.viewProfile">
+
+        <span class="closebtn" onclick="this.parentElement.style.display='none';" ng-click="my_profile.clearViewProfile()">&times;</span>
+        <p align="center">Please click on update before viewing your profile.</p>
+      </div>
+    </div>
+  </div>
+
+

@@ -1,0 +1,178 @@
+<ng-include src="'views/partials/project_header.html'"></ng-include>
+<!-- header ends-->
+<div id="c-describe">
+  <div class="container">
+    <!-- contributor-describe-flow starts-->
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="c-d-flow">
+          <a href="/#/structure_contributor" class="c-d-active">
+            <span>Describe</span>
+          </a>
+          <a href="/#/structure_contributor" ng-click="contributor.structurepage(contributor.project_name,contributor.category);">
+            <span>Structure</span>
+          </a>
+          <a href="#needs_contributor" ng-click="contributor.needspage(contributor.project_name,contributor.category);">
+           <span>Needs</span>
+         </a>
+       </div>
+     </div>
+     <div class="col-sm-6"></div>
+   </div>
+   <!-- contributor-describe-flow ends-->
+   <!-- contributor-describe-project view starts-->
+   <div class="row">
+    <div class="col-sm-6">
+     <div id="c-d-project">
+      <div class="c-d-p">
+        <div class="row c-d-bg">
+          <div class="col-sm-6 col-xs-6">
+            <h4>{{contributor.project_name|limitTo: 22}}{{contributor.project_name.length > 20 ? '...' : ''}}</h4>
+          </div>
+          <div class="col-sm-6 col-xs-6">
+            <p>{{contributor.category}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="c-d-image">
+        <img ng-src ="{{contributor.image || 'images/image_placeholder_gray.png'}}" class="img-responsive">
+      </div>
+      <div class="c-d-details">
+        <br />
+        <p>By<a><span class="c-name" ng-click = "contributor.userprofile(userOriginatorId);">{{userOriginatorName}}</span></a>
+        </p>
+        <div class="c-d-sdescription">{{contributor.short_description}}
+        </div>
+
+        <div class="c-d-social">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-3 col-xs-3">
+                  <a href="" ng-if="contributor.like" ng-click="contributor.like_project(false)"><i class="material-icons like_icon" >thumb_up</i></a>
+
+                  <a href="" ng-if="!contributor.like" ng-click="contributor.like_project(true)"><i class="material-icons like_icon_grey" >thumb_up</i></a>
+
+                  <span ng-show='contributor.count > 0'>{{contributor.count}}</span>
+                </div>
+                <!-- <div class="col-sm-3">
+                  <div class="dropdown">
+                    <button id="socialIcon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      <i class="material-icons like_icon_grey">share</i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-icons" aria-labelledby="socialIcon">
+                      <li><a href="">
+                        <i class="fa fa-envelope"></i>
+                      </a></li>
+                      <li><a href="">
+                        <i class="fa fa-facebook fa-fb"></i>
+                      </a></li>
+                      <li><a href="">
+                        <i class="fa fa-twitter"></i>
+                      </a></li>
+                    </ul>
+                  </div>
+                </div> -->
+                <div class="col-sm-3 col-xs-3">
+
+
+                  <a href="" ng-if="contributor.follow" ng-click="contributor.follow_project(false)"><i class="material-icons like_icon" >add_circle_outline</i></a>
+
+                  <a href="" ng-if="!contributor.follow" ng-click="contributor.follow_project(true)"><i class="material-icons like_icon_grey" >add_circle_outline</i></a>
+
+                  <span ng-show='contributor.follow_count > 0'>{{contributor.follow_count}}</span>
+                </div>
+                <div class="col-sm-6 col-xs-6"></div>
+              </div>
+            </div>
+            <div class="col-sm-6"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- contributor-describe description starts-->
+<div id="c-d-layout">
+  <div class="row">
+    <div class="col-sm-12">
+      <div>
+
+        <div ng-if = "contributor.background">
+          <h5>Background</h5>
+          <p>{{contributor.background}}
+          </p>
+        </div>
+        <div ng-if = "contributor.impact">
+          <h5>Impact</h5>
+          <p>{{contributor.impact}}
+          </p>
+        </div>
+        <div ng-if = "contributor.need">
+          <h5>Need</h5>
+          <p>{{contributor.need}}
+          </p>
+        </div>
+        <div ng-if = "contributor.risk">
+          <h5>Risk</h5>
+          <p>{{contributor.risk}}
+          </p>
+        </div>
+        <div ng-if = "contributor.others">
+          <h5>Other Ways to Help</h5>
+          <p>{{contributor.others}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- contributor-describe description ends-->
+  </div>
+  <div class="col-sm-6">
+    <div class="c-d-comments">
+      <h4>Comments</h4>
+      <div class="c-d-com">
+        <i class="material-icons c-d-icon">comment</i>
+        <textarea class="form-control" id="tabfocus" rows="3" maxlength="150" ng-model="data.description" placeholder="Type here"></textarea>
+        <button type="button" ng-click="contributor.addComment(data)" class="btn btn-secondary pop_up_button_post">Post</button>
+      </div>
+    </div>
+    <div class="c-d-user" ng-repeat="comment in contributor.comment_body">
+      <div class="row">
+        <div class="col-sm-1 col-xs-2">
+          <div class="c-image">
+           <img ng-src="{{comment.commented_image.file.url || 'images/image_placeholder_gray.png'}}" class="comment-circle img-responsive">
+         </div>
+       </div>
+       <div class="col-sm-9 col-xs-7">
+        <div class="p-comment">
+          <span class="user-comments">{{comment.commented_name}}</span>
+          <span class="comment-date">{{comment.created_at | date: 'MMMM dd, yyyy'}}</span>
+
+          <div class="p-u-comment" ><hm-read-more
+            hm-text="{{ comment.comment_body }}"
+            hm-limit="50"
+            hm-more-text="MORE"
+            hm-less-text="LESS"
+            hm-dots-class="dots"
+            hm-link-class="links">{{comment.comment_body}}
+          </hm-read-more>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-2 col-xs-3">
+      <a href="">
+        <img ng-src="../images/trash.png" ng-click="contributor.deleteComment(comment)" ng-if="comment.commented_name === userName">
+      </a>
+      <a href="">
+        <img ng-src="../images/trash.png" ng-click="contributor.deleteComment(comment)" ng-if="userName === userOriginatorName && comment.commented_name != userName">
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<!-- contributor-describe-project view ends-->
+</div>
+</div>
+</div>

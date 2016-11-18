@@ -1,0 +1,397 @@
+<nav class="navbar navbar-default navbar-fixed-top navbar-new-custom" ng-controller="HeaderCtrl as header">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#">
+        <img ng-src="../images/perrshape-pro-logo-60.png" ng-click="header.logo();" class="img-responsive">
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-if="headerName">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#dashboard_new" ng-click = "structure.getPage();">Dashboard </a></li>
+        <li><a href="#land">Discover</a></li>
+        <li><a href="#describe">Create Project</a></li>
+        <!-- <li><a href="#">Login</a></li>
+        <li><a href="#">sign up</a></li> -->
+        <li>
+          <div id="new" class="dropdown a-dropdown">
+            <button class="dropdown-toggle" id="account-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <img ng-src="{{profileImage ? profileImage : 'images/image_placeholder_gray.png'}}" class="c-land img-responsive picture">
+              <span ng-if="headerName">{{userName}}</span>
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu dropdown-menu-categories" aria-labelledby="account-dropdown">
+                <li><a href="#followed_projects">Followed Projects</a></li>
+                <li><a href="#my_profile">My Profile</a></li>
+                <li class="divider"></li>
+                <li class="a-logout"><a href="#land" ng-click = "header.logout()">Logout</a></li>
+              </ul>
+            </div>
+          </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+  <div id="user-profile">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="c-d-flow">
+          <a href="" class="c-d-active">
+            <span>My Profile</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-8"></div>
+    </div>
+    <div class="row u-p-margin">
+      <div class="col-sm-6">
+        <div>
+          <div class="my-profile">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="m-p">
+                  <!-- <a href=""><img src="../images/icon-circle-close.png" class="img-responsive"></a> -->
+                  <img class="c-profile img-responsive" ng-src="../images/bg_img-1.png">
+                </div>
+              </div>
+              <div class="col-sm-1">
+                <a href="">
+                  <img ng-src="../images/icon-circle-close.png" class="p-close-icon">
+                </a>
+                <button type="button" class="btn btn-default">Change</button>
+              </div>
+              <div class="col-sm-7">
+                <div class="p-name">Jane Honey</div>
+                <div class="p-place">san francisco, ca</div>
+              </div>
+            </div>
+          </div>
+          <div class="user-profile-input">
+            <div class="row uprofile-pad">
+              <div class="col-sm-4 label-margin text-left">
+                <span>First Name</span>
+              </div>
+              <div class="col-sm-7">
+                <input type="name" class="form-control" id="exampleInputEmail1" placeholder="Please enter your first name">
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+            <div class="row uprofile-pad">
+              <div class="col-sm-4 label-margin text-left">
+                <span>Last Name</span>
+              </div>
+              <div class="col-sm-7">
+                <input type="name" class="form-control" id="lname" placeholder=" Please enter your last name">
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+            <div class="row uprofile-pad">
+              <div class="col-sm-4 label-margin text-left">
+                <span>UserName*</span>
+              </div>
+              <div class="col-sm-7">
+                <input type="name" class="form-control" id="uname" placeholder="Please enter the username">
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+            <div class="row uprofile-pad">
+              <div class="col-sm-4 label-margin text-left">
+                <span>Email*</span>
+              </div>
+              <div class="col-sm-7">
+                <input type="name" class="form-control" id="email" placeholder="Please enter your email">
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+            <div class="row uprofile-pad">
+              <div class="col-sm-4 label-margin text-left">
+                <span>Phone</span>
+              </div>
+              <div class="col-sm-7">
+                <input type="name" class="form-control" id="phoneno" placeholder="Please enter your phone number">
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+            <div class="row uprofile-pad">
+              <div class="col-sm-4 label-margin text-left">
+                <span>Company</span>
+              </div>
+              <div class="col-sm-7">
+                <input type="name" class="form-control" id="company" placeholder="Please enter your company name">
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+            <div class="row uprofile-pad">
+              <div class="col-sm-4 label-margin text-left">
+                <span>Location</span>
+              </div>
+              <div class="col-sm-7">
+                <input type="name" class="form-control" id="location" placeholder="Please enter your location">
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+            <div class="row uprofile-pad">
+              <div class="col-sm-4 label-margin text-left">
+                <span>Time Zone</span>
+              </div>
+              <div class="col-sm-7">
+                <input  ui-timepicker="timePickerOptions" type="text" placeholder="hh:mm am/pm">
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+            <div class="row uprofile-pad">
+              <div class="col-sm-4 label-margin text-left">
+                <span>Websites</span>
+              </div>
+              <div class="col-sm-7">
+                <input type="name" class="form-control" id="url" placeholder="Add url here">
+                <!-- <p>http://www.facebook.com/sbhavankar</p><p>http://www.facebook.com/sbhavankar</p><p>http://www.facebook.com/sbhavankar</p> -->
+              </div>
+              <div class="col-sm-1">
+                <a href="">
+                  <img class="url-add-icon" ng-src="../images/icon-add.png">
+                </a>
+              </div>
+            </div>
+            <div class="row p-url">
+              <div class="col-sm-4"></div>
+              <div class="col-sm-8">
+                <div class="in-one">
+                  <div class="row">
+                    <div class="col-sm-10">
+                      <span>http://www.facebook.com/sbhavankar</span>
+                    </div>
+                    <div class="col-sm-2 text-right">
+                      <a href="">
+                        <img ng-src="../images/icon-close.png" class="url-add-icon">
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="in-one">
+                  <div class="row">
+                    <div class="col-sm-10">
+                      <span>http://www.facebook.com/sbhavankar</span>
+                    </div>
+                    <div class="col-sm-2 text-right">
+                      <a href="">
+                        <img ng-src="../images/icon-close.png" class="url-add-icon">
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="in-one">
+                  <div class="row">
+                    <div class="col-sm-10">
+                      <span>http://www.facebook.com/sbhavankar</span>
+                    </div>
+                    <div class="col-sm-2 text-right">
+                      <a href="">
+                        <img ng-src="../images/icon-close.png" class="url-add-icon">
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="about-info">
+          <p>ABOUT ME</p>
+          <form>
+            <textarea class="form-control" rows="18" placeholder="Please write about yourself"></textarea>
+          </form>
+        </div>
+        <div class="my-interest">
+          <p>my interest</p>
+          <div class="ad-interest-one">
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-11">
+                <div class="interests-list ad-il">
+                  <div>
+                    <div class="in-one">
+                      <div class="row">
+                        <div class="col-sm-10">
+                          Art,design and culture
+                        </div>
+                        <div class="col-sm-2 text-right">
+                          <a href="">
+                            <img ng-src="../images/icon-close.png" class="url-add-icon">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="interests-list">
+                  <div>
+                    <div class="in-one">
+                      <div class="row">
+                        <div class="col-sm-10">
+                          Art,design and culture
+                        </div>
+                        <div class="col-sm-2 text-right">
+                          <a href="">
+                            <img ng-src="../images/icon-add.png" class="url-add-icon">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="in-one">
+                      <div class="row">
+                        <div class="col-sm-10">
+                          Animals
+                        </div>
+                        <div class="col-sm-2 text-right">
+                          <a href="">
+                            <img ng-src="../images/icon-add.png" class="url-add-icon">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="in-one">
+                      <div class="row">
+                        <div class="col-sm-10">
+                          Business
+                        </div>
+                        <div class="col-sm-2 text-right">
+                          <a href="">
+                            <img ng-src="../images/icon-add.png" class="url-add-icon">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="in-one">
+                      <div class="row">
+                        <div class="col-sm-10">
+                          Technology
+                        </div>
+                        <div class="col-sm-2 text-right">
+                          <a href="">
+                            <img ng-src="../images/icon-add.png" class="url-add-icon">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="in-one">
+                      <div class="row">
+                        <div class="col-sm-10">
+                          Community
+                        </div>
+                        <div class="col-sm-2 text-right">
+                          <a href="">
+                            <img ng-src="../images/icon-add.png" class="url-add-icon">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="in-one">
+                      <div class="row">
+                        <div class="col-sm-10">
+                          Disaster Relief
+                        </div>
+                        <div class="col-sm-2 text-right">
+                          <a href="">
+                            <img ng-src="../images/icon-add.png" class="url-add-icon">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="in-one">
+                      <div class="row">
+                        <div class="col-sm-10">
+                          Education
+                        </div>
+                        <div class="col-sm-2 text-right">
+                          <a href="">
+                            <img ng-src="../images/icon-add.png" class="url-add-icon">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="in-one">
+                      <div class="row">
+                        <div class="col-sm-10">
+                          Environment
+                        </div>
+                        <div class="col-sm-2 text-right">
+                          <a href="">
+                            <img ng-src="../images/icon-add.png" class="url-add-icon">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="in-one">
+                      <div class="row">
+                        <div class="col-sm-10">
+                         Faith
+                       </div>
+                       <div class="col-sm-2 text-right">
+                        <a href="">
+                          <img ng-src="../images/icon-add.png" class="url-add-icon">
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="in-one">
+                    <div class="row">
+                      <div class="col-sm-10">
+                        Food and Shelter
+                      </div>
+                      <div class="col-sm-2 text-right">
+                        <a href="">
+                          <img ng-src="../images/icon-add.png" class="url-add-icon">
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="in-one">
+                    <div class="row">
+                      <div class="col-sm-10">
+                        Health & Medicine
+                      </div>
+                      <div class="col-sm-2 text-right">
+                        <a href="">
+                          <img ng-src="../images/icon-add.png" class="url-add-icon">
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="in-one">
+                    <div class="row">
+                      <div class="col-sm-10">
+                        Politics
+                      </div>
+                      <div class="col-sm-2 text-right">
+                        <a href="">
+                          <img ng-src="../images/icon-add.png" class="url-add-icon">
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row profile-button">
+    <div class="col-sm-4 col-sm-offset-8 text-right">
+      <a href="">view profile</a>
+      <button type="button" class="btn btn-info btn-attach">update</button>
+    </div>
+  </div>
+  <!--  <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div> -->
+</div>
+</div>
